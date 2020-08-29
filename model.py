@@ -7,6 +7,8 @@ NAPACEN_ZNAK = 'Z'
 NAROBE = '-'
 PRAVILNO = '+'
 ZACETEK = '!'
+NEVELJAVNA_IZBIRA = 'L'
+USPESEN_VNOS = 'OK'
 
 
     
@@ -22,12 +24,12 @@ class Igra:
         #Slovar, v katerega bodo vnešene vrednosti, za katere igralec meni, da bi se 
         #lahko pojavile v določeni celici.
         if moznosti is None:
-        self.moznosti = {(i,j): set() for i in range(1, 10) for j in range(1, 10)}
+            self.moznosti = {(i,j): set() for i in range(1, 10) for j in range(1, 10)}
         else: 
             self.moznosti = moznosti
         #vrne vse celice v istem stolpcu, vrstici ali kvadratku, ki imajo enako vrednost kot dana celica
         self.napake = {(i,j): set() for i in range(1, 10) for j in range(1, 10)}
-        
+
     def __repr__(self):
         '''Vrne obliko (rešitve, začetno polje, trenutno polje, vnešene možnosti).'''
         return  repr((self.resitve, self.zacetni, self.trenutni, self.moznosti))
@@ -42,6 +44,7 @@ class Igra:
             return FIKSNO_POLJE
         else:
             self.trenutni[celica] = stevilo
+            return USPESEN_VNOS
     
 
     def moznost(self, celica, stevilo):
@@ -120,7 +123,8 @@ class Igra:
 
     def preveri_vnos(self, celica):
         '''Preveri, ali je vnešeno število pravilno glede na
-        ostala trenutno vnešena števila (in ne glede na rešitev). '''
+        ostala trenutno vnešena števila (in ne glede na rešitev).
+        Polja, kjer se število iz celice ponovi, vnese v slovar.'''
         self.napake[celica] = set()
         v = self.preveri_vrstico(celica)
         s = self.preveri_stolpec(celica)
@@ -131,19 +135,65 @@ class Igra:
 
     def pocisti(self):
         '''Začne isto igro od začetka'''
-        self.trenutni = {(i,j): self.zacetni_polja[i - 1][j - 1] for i in range(1, 10) for j in range(1, 10)}
+        self.trenutni = self.zacetni
+class Sudoku:
+    
+    def __init__(self, datoteka_s_stanjem, datoteka_s_sudokuji='Sudoku\sudoku_in_resitve.txt'):
+        self.igre = {}
+        self.datoteka_s_stanjem = datoteka_s_stanjem
+        self.datoteka_s_sudokuji = datoteka_s_sudokuji
+    
+    def prost_id_igre(self):
+        if len(self.igre) == 0:
+            return 0
+        else:
+            return max(self.igre.keys()) + 1
+    
+    def izberi_sudoku(self, tezavnost):
+        with open(self.datoteka_s_sudokuji, 'r', encoding='utf-8') as datoteka:
+            igre = [make_tuple(vrstica.strip()) for vrstica in datoteka]
+            sudoku = None
+            if tezavnost == 1:
+                sudoku = random.choice(igre[:15])
+            if tezavnost == 2:
+                sudoku = random.choice(igre[15:30])
+            if tezavnost == 3:
+                sudoku = random.choice(igre[30:])
+        return sudoku
 
+    def nova_igra(self, tezavnost):
+        if tezavnost not in (1, 2, 3):
+            return NEVELJAVNA_IZBIRA
+        id_igre = self.prost_id_igre()
+        self.igre[id_igre] = Igra(self.izberi_sudoku(tezavnost))
+        self.zapisi_igre_v_datoteko()
+        return id_igre
 
-with open('sudoku_in_resitve.txt') as datoteka:
-    igre = [make_tuple(vrstica.strip()) for vrstica in datoteka]
+    def vnesi(self, id_igre, celica, stevilo):
+        self.nalozi_igre_iz_datoteke()
+        igra = self.igre[id_igre]
+        igra.vnos(celica, stevilo)
+        self.igre[id_igre] = igra 
+        self.zapisi_igre_v_datoteko()
+        return igra.vnos(celica, stevilo)
+    
+    def vnesi_moznost(self, id_igre, celica, stevilo):
+        self.nalozi_igre_iz_datoteke()
+        igra = self.igre[id_igre]
+        igra.moznost(celica, stevilo)
+        self.igre[id_igre] = igra
+        self.zapisi_igre_v_datoteko()
+        return igra.moznost(celica, stevilo)
 
-
-def nova_igra(tezavnost):
-    sudoku = None
-    if tezavnost == 1:
-        sudoku = random.choice(igre[:15])
-    if tezavnost == 2:
-        sudoku = random.choice(igre[15:30])
-    else:
-        sudoku = random.choice(igre[30:])
-    return Igra(sudoku)
+    def zapisi_igre_v_datoteko(self):
+        with open(self.datoteka_s_stanjem, 'w', encoding='utf-8') as f:
+            seznam = {id_igre: (igra.resitve, igra.zacetni, igra.trenutni, igra.moznosti)
+                     for id_igre, igra in self.igre.items()}
+            print(self.igre.items())
+            json.dump(str(seznam), f)
+        
+    def nalozi_igre_iz_datoteke(self):
+        with open(self.datoteka_s_stanjem, 'r', encoding="utf-8") as f:
+            igre = json.load(f)
+            self.igre = {int(id_igre): Igra((zacetni, resitev), trenutni, moznost)
+                         for id_igre, (resitev, zacetni, trenutni, moznost) in eval(igre).items()}

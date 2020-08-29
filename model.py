@@ -12,18 +12,25 @@ ZACETEK = '!'
     
 class Igra:
      
-    def __init__(self, seznam): #Seznam je oblike (zaporedna številka, črka, začetni sudoku, rešitev)
-        self.tezavnost = int(seznam[0]) 
-        self.resitve_polja = seznam[3]
-        self.resitve = {(i,j): self.resitve_polja[i - 1][j - 1] for i in range(1, 10) for j in range(1, 10)}
-        self.zacetni_polja = seznam[2]
-        self.zacetni = {(i,j): self.zacetni_polja[i - 1][j - 1] for i in range(1, 10) for j in range(1, 10)}
-        self.trenutni = {(i,j): self.zacetni_polja[i - 1][j - 1] for i in range(1, 10) for j in range(1, 10)}
+    def __init__(self, seznam, trenutni=None, moznosti=None): #Seznam je oblike (začetni sudoku, rešitev)
+        self.resitve = seznam[1]
+        self.zacetni = seznam[0]
+        if trenutni is None:
+            self.trenutni = seznam[0]
+        else:
+            self.trenutni = trenutni
         #Slovar, v katerega bodo vnešene vrednosti, za katere igralec meni, da bi se 
         #lahko pojavile v določeni celici.
+        if moznosti is None:
         self.moznosti = {(i,j): set() for i in range(1, 10) for j in range(1, 10)}
+        else: 
+            self.moznosti = moznosti
         #vrne vse celice v istem stolpcu, vrstici ali kvadratku, ki imajo enako vrednost kot dana celica
         self.napake = {(i,j): set() for i in range(1, 10) for j in range(1, 10)}
+        
+    def __repr__(self):
+        '''Vrne obliko (rešitve, začetno polje, trenutno polje, vnešene možnosti).'''
+        return  repr((self.resitve, self.zacetni, self.trenutni, self.moznosti))
         
     def zmaga(self):
         return self.trenutni == self.resitve    

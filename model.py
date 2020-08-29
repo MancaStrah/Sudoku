@@ -9,6 +9,7 @@ PRAVILNO = '+'
 ZACETEK = '!'
 NEVELJAVNA_IZBIRA = 'L'
 USPESEN_VNOS = 'OK'
+ZMAGA = 'W'
 
 
     
@@ -44,7 +45,9 @@ class Igra:
             return FIKSNO_POLJE
         else:
             self.trenutni[celica] = stevilo
-            return USPESEN_VNOS
+        if self.zmaga:
+            return ZMAGA
+        return USPESEN_VNOS
     
 
     def moznost(self, celica, stevilo):
@@ -136,6 +139,8 @@ class Igra:
     def pocisti(self):
         '''Začne isto igro od začetka'''
         self.trenutni = self.zacetni
+
+
 class Sudoku:
     
     def __init__(self, datoteka_s_stanjem, datoteka_s_sudokuji='Sudoku\sudoku_in_resitve.txt'):

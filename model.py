@@ -133,7 +133,7 @@ class Igra:
         s = self.preveri_stolpec(celica)
         k = self.preveri_kvadratek(celica)
         if v == NAROBE or s == NAROBE or k == NAROBE:
-            return NAROBE 
+            return self.napake[celica] 
         return PRAVILNO
 
     def pocisti(self):
@@ -189,7 +189,11 @@ class Sudoku:
         self.igre[id_igre] = igra
         self.zapisi_igre_v_datoteko()
         return igra.moznost(celica, stevilo)
-
+    
+    def preveri_vnos(self, id_igre, celica):
+        igra = self.igre[id_igre]
+        return igra.preveri_vnos(celica)
+        
     def zapisi_igre_v_datoteko(self):
         with open(self.datoteka_s_stanjem, 'w', encoding='utf-8') as f:
             seznam = {id_igre: (igra.resitve, igra.zacetni, igra.trenutni, igra.moznosti)

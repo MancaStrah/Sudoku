@@ -7,7 +7,7 @@ SKRIVNOST = 'zelva'
 DATOTETKA_S_STANJEM = 'Sudoku\stanje.json'
 DATOTOEKA_S_SUDOKUJI = 'Sudoku\sudoku_in_resitve.txt'
 
-uporabniki = Uporabniki()
+
 sudoku = Sudoku(DATOTETKA_S_STANJEM, DATOTOEKA_S_SUDOKUJI)
 
 
@@ -17,7 +17,6 @@ def index():
 
 @bottle.post('/')
 def nov_uporabnik():
-    id_uporabnika = uporabniki.nov_uporabnik()
     bottle.redirect('/domaca_stran/')
 
 @bottle.get('/domaca_stran/')
@@ -29,22 +28,23 @@ def nova_igra():
     tezavnost = int(bottle.request.forms.getunicode('tezavnost'))
     id_igre = sudoku.nova_igra(tezavnost)
     bottle.response.set_cookie('id_igre', id_igre, secret=SKRIVNOST, path='/')
-    bottle.redirect('/igra/')
+    bottle.redirect('/igra/' + str(id_igre) + '/')
 
-@bottle.get('/igra/')
-def pokazi_igro():
+@bottle.get('/igra/<id_igre>/')
+def pokazi_igro(id_igre):
     id_igre = (bottle.request.get_cookie('id_igre', secret=SKRIVNOST))
     igra = sudoku.igre[id_igre]
     return bottle.template('Sudoku/igra.tpl', igra=igra)
 
-@bottle.post('/igra/')
-def vnesi():
+@bottle.post('/igra/<id_igre>/')
+def vnesi(id_igre):
     id_igre = int(bottle.request.get_cookie('id_igre', secret=SKRIVNOST))
     celica = make_tuple((bottle.request.forms.getunicode('celica')))
     stevilo = int(bottle.request.forms.getunicode('stevilo'))
     sudoku.vnesi(id_igre, celica, stevilo)
     igra = sudoku.igre[id_igre]
-    bottle.redirect('/igra/')
+    bottle.redirect('/igra/' + str(id_igre) + '/')
+
 
 # @bottle.post('/igra/')
 # def vnesi_moznost():

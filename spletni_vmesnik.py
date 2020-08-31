@@ -32,9 +32,9 @@ def nova_igra():
 
 @bottle.get('/igra/<id_igre>/')
 def pokazi_igro(id_igre):
-    id_igre = (bottle.request.get_cookie('id_igre', secret=SKRIVNOST))
+    id_igre = int((bottle.request.get_cookie('id_igre', secret=SKRIVNOST)))
     igra = sudoku.igre[id_igre]
-    return bottle.template('Sudoku/igra.tpl', igra=igra)
+    return bottle.template('Sudoku/igra.tpl', igra=igra, id_igre=id_igre)
 
 @bottle.post('/igra/<id_igre>/')
 def vnesi(id_igre):

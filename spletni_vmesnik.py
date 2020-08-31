@@ -1,4 +1,5 @@
 import bottle
+from ast import literal_eval as make_tuple
 from model import *
 
 COOKIE = 'piskotek'
@@ -39,9 +40,10 @@ def pokazi_igro():
 @bottle.post('/igra/')
 def vnesi():
     id_igre = int(bottle.request.get_cookie('id_igre', secret=SKRIVNOST))
-    celica = bottle.request.forms.getunicode('celica')
-    stevilo = bottle.request.forms.getunicode('stevilo')
+    celica = make_tuple((bottle.request.forms.getunicode('celica')))
+    stevilo = int(bottle.request.forms.getunicode('stevilo'))
     sudoku.vnesi(id_igre, celica, stevilo)
+    igra = sudoku.igre[id_igre]
     bottle.redirect('/igra/')
 
 # @bottle.post('/igra/')
@@ -58,7 +60,7 @@ def vnesi():
 #     id_igre = (bottle.request.get_cookie('id_igre', secret=SKRIVNOST))
 #     celica = bottle.request.forms.get('(vrstica, stolpec)')
 #     stevilo = bottle.request.forms.getunicode('stevilo')
-#     sudoku.vnesi_moznost(id_igre, celica, stevilo)
+#     sudoku.preveri_vnos(id_igre, celica)
 #     bottle.redirect('/igra/')
 
 

@@ -16,7 +16,7 @@ def index():
     return bottle.template('Sudoku\index.tpl')
 
 @bottle.post('/')
-def nov_uporabnik():
+def nov_uporabnik():   
     bottle.redirect('/domaca_stran/')
 
 @bottle.get('/domaca_stran/')
@@ -46,6 +46,37 @@ def vnesi(id_igre):
     bottle.redirect('/igra/' + str(id_igre) + '/')
 
 
+@bottle.post('/preveri_zmaga/<id_igre>/')
+def zmaga(id_igre):
+    id_igre = int(bottle.request.get_cookie('id_igre', secret=SKRIVNOST))
+    igra = sudoku.igre[id_igre]
+    if igra.zmaga():
+        return bottle.template('Sudoku/zmaga.tpl', igra=igra, id_igre=id_igre)
+    return bottle.template('Sudoku/nezmaga.tpl', igra=igra, id_igre=id_igre)
+
+@bottle.post('/preveri_preusmeritev/<id_igre>/')
+def preusmeritev(id_igre):
+    vnos = int(bottle.request.forms.getunicode('vnos'))
+    id_igre = int(bottle.request.get_cookie('id_igre', secret=SKRIVNOST))
+    if vnos == 1:
+        bottle.redirect('/domaca_stran/')
+    elif vnos == 2:
+        bottle.redirect('/igra/' + str(id_igre) + '/')
+    
+
+
+
+# @bottle.get('/poraz/')
+
+# @bottle.post('/igra/')
+# def preveri_vnos():
+#     id_igre = (bottle.request.get_cookie('id_igre', secret=SKRIVNOST))
+#     celica = bottle.request.forms.get('(vrstica, stolpec)')
+#     stevilo = bottle.request.forms.getunicode('stevilo')
+#     sudoku.preveri_vnos(id_igre, celica)
+#     bottle.redirect('/igra/')
+
+
 # @bottle.post('/igra/')
 # def vnesi_moznost():
 #     id_igre = int(bottle.request.get_cookie('id_igre', secret=SKRIVNOST))
@@ -55,13 +86,6 @@ def vnesi(id_igre):
 
     # bottle.redirect('/igra/')
 
-# @bottle.post('/igra/')
-# def preveri_vnos():
-#     id_igre = (bottle.request.get_cookie('id_igre', secret=SKRIVNOST))
-#     celica = bottle.request.forms.get('(vrstica, stolpec)')
-#     stevilo = bottle.request.forms.getunicode('stevilo')
-#     sudoku.preveri_vnos(id_igre, celica)
-#     bottle.redirect('/igra/')
 
 
 

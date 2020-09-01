@@ -17,7 +17,7 @@
         }
         
         h1 {
-            font-size: 140px;
+            font-size: 170px;
             color: #4d2e00;
             font-weight: bold; 
             padding-top: 150px;
@@ -38,7 +38,7 @@
             text-align: center;
             text-decoration: none;
             display: inline-block;
-            font-size: 20px;    
+            font-size: 30px;    
         }
     
    

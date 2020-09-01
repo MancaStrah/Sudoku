@@ -60,14 +60,14 @@
                                 <td class="poln_kvadratek"> {{igra.zacetni[(vrstica, stolpec)]}} </td>
                             % elif igra.trenutni [(vrstica, stolpec)] != 0 and igra.zacetni[(vrstica, stolpec)] == 0:
                                 <td class="vnesen_kvadratek"> 
-                                <form action="/igra/" method="post">
+                                <form action="/igra/{{id_igre}}/" method="post">
                                 <input type="number" class="izpolnjen_gumb" id="stevilo" name="stevilo" appearance="none", value="{{igra.trenutni[(vrstica, stolpec)]}}">
                                 <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
                                 </form>
                                 </td>
                             % else:
                             <td class="prazen_kvadratek"> 
-                                <form action="/igra/" method="post">
+                                <form action="/igra/{{id_igre}}/" method="post">
                                 <input type="number" class ="prazen_gumb" id="stevilo" name="stevilo" appearance="none">
                                 <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
                                 </form>
@@ -82,15 +82,20 @@
           <td>
             <table>
                 <tr>
-                    <p>Na levi izberite polje, v katero želite vnesti število, in ga vnesite.</p>
+                    <p>Za vnos števila v polje na levi izberite polje, vanj vnesite izbrano število in pritisnite enter.</p>
+                </tr>
+            
+                <tr>
+                    <p>Preverite, ali ste sudoku rešili pravilno. </p>
+                    <form action="/preveri_zmaga/{{id_igre}}/" method="post">
+                        <button type="submit">preveri</button>
+                    </form>
                 </tr>
                 <tr>
-                    
+                    <p>Pokaži rešitev.</p>
+                   
                 </tr>
-                <tr>
-          
-                </tr>
-                <tr></tr>
+              
 
             </table>
           </td> 

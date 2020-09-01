@@ -7,18 +7,49 @@
     </head>
 
     <style>
+        body, html {
+            height: 100%;
+        }
+
+        body {
+            background-color: #FFEFD5;
+            margin: auto;
+        }
+        
+        h1 {
+            font-size: 140px;
+            color: #4d2e00;
+            font-weight: bold; 
+            padding-top: 150px;
+            padding-bottom: 50px;
+            text-align: center;
+        }
+
         .center {
-            padding: 70px 0;
+            padding: 150px;
             text-align: center;
             }
+        
+        .gumb {
+            background-color: #995900; 
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 20px;    
+        }
+    
+   
     </style>
 
     <body>
-        <h1 class='center'>SUDOKU</h1>
+        <h1>SUDOKU</h1>
 
         <div class='center'>
         <form action='/' method='post'>
-            <button type='submit'>vstopi</button>
+            <button type='submit' class="gumb">vstopi</button>
         </form>
 
         </div>

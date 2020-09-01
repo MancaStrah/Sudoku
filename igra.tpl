@@ -7,50 +7,89 @@
     </head>
 
     <style>
+        body, html {
+            height: 100%;
+        }
+
+        body {
+            background-color: #FFEFD5;
+            margin: auto;
+        }
+        
+        h1 {
+            font-size: 50px;
+            color: #FFEFD5;
+            font-weight: bold;
+            padding-left: 15px;
+            padding-top: 20px;
+            padding-bottom:20px;
+            background-color: #4d2e00;
+            text-align: left;
+        }
     
-    input[type=number]::-webkit-inner-spin-button, 
-    input[type=number]::-webkit-outer-spin-button {
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button {
             -webkit-appearance: none;
             margin: 0;
         }
 
   
-    table {
-        border-inline-color: black;
-    }
+        table {
+            border-inline-color: #4d2e00;
+        }
 
-    .prazen_gumb {
-        background-color: lightgreen;
-        width: 20px;
-    }
+        .prazen_gumb {
+            background-color: #fff4e6;
+            width: 20px;
+        }
 
-    .izpolnjen_gumb{
-        background-color: lightblue;
-        width: 20px;
-    }
+        .izpolnjen_gumb{
+            background-color: #ffdeb3;
+            width: 20px;
+        }
 
-    .polje {
-        border: 7px solid black;
+        .polje {
+            border: 7px solid  #4d2e00;
+            border-color: #4d2e00;
+            border-width: 2px;
+            border-inline-end-color:#4d2e00 ;
+        }
 
-    }
+        .poln_kvadratek {
+            border: 2px solid #4d2e00;
+            background-color: #ffc880;
+            width: 20px;
 
+        }
 
-    .poln_kvadratek {
-        border: 2px solid gray;
-        background-color: lightskyblue;
-        width: 20px;
+        .navodilo {
+            font-size: 16px;
+            color: #4d2e00;
+            padding: 15px;
+            text-align: center;
+        }
 
-    }
-
-
+        .gumb {
+            background-color: #995900; 
+            border: none;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 15px;    
+        }
+    
+        
     </style>
 
     <body>
+        <h1>SUDOKU</h1>
      
-    <table >
+    <table style="width: fit-content" >
         <tr>
           <td>
-            <table class="polje" style="width:40%">
+            <table class="polje">
                 <tr>
                     <td> 
                         <table>
@@ -306,20 +345,22 @@
           <td>
             <table>
                 <tr>
-                    <p>Za vnos števila v polje na levi izberite polje, vanj vnesite izbrano število in pritisnite enter.</p>
+                    <p class="navodilo">Za vnos števila v polje na levi izberite polje, <br> vanj vnesite izbrano število in pritisnite enter.</p>
                 </tr>
                 <tr>
-                    <p>Preverite, ali ste sudoku rešili pravilno. </p>
+                    <p class="navodilo">Preverite, ali ste sudoku rešili pravilno. <br>
                     <form action="/preveri_zmaga/{{id_igre}}/" method="post">
-                        <button type="submit">preveri</button>
+                        <button class="gumb" type="submit">preveri</button>
                     </form>
+                </p>
                 </tr>
                 
                 <tr>
-                    <p>Počistite polje in začnite od začetka.</p>
+                    <p class="navodilo">Počistite polje in začnite od začetka. <br>
                      <form action="/pocisti_igro/{{id_igre}}/" method="post">
-                        <button type="submit">počisti</button>
+                        <button class="gumb" type="submit">počisti</button>
                     </form>  
+                </p>
                 </tr>
               
 

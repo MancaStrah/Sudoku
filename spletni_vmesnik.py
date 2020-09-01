@@ -54,19 +54,52 @@ def zmaga(id_igre):
         return bottle.template('Sudoku/zmaga.tpl', igra=igra, id_igre=id_igre)
     return bottle.template('Sudoku/nezmaga.tpl', igra=igra, id_igre=id_igre)
 
+@bottle.post('/pocisti_igro/<id_igre>/')
+def pocisti(id_igre):
+    id_igre = int(bottle.request.get_cookie('id_igre', secret=SKRIVNOST))
+    igra = sudoku.igre[id_igre]
+    igra.pocisti()
+    bottle.redirect('/igra/' + str(id_igre) + '/')
+
 @bottle.post('/preveri_preusmeritev/<id_igre>/')
 def preusmeritev(id_igre):
     vnos = int(bottle.request.forms.getunicode('vnos'))
     id_igre = int(bottle.request.get_cookie('id_igre', secret=SKRIVNOST))
-    if vnos == 1:
+    igra = sudoku.igre[id_igre]
+    if vnos == 1: #uporabnik želi igrati novo igro
         bottle.redirect('/domaca_stran/')
-    elif vnos == 2:
+    elif vnos == 2: #uporabnik želi nadaljevati z igro, ki jo je igral
         bottle.redirect('/igra/' + str(id_igre) + '/')
+    elif vnos == 3: #uporabnik želi igrati isto igro od začetka
+        igra.pocisti()
+        bottle.redirect('/igra/' + str(id_igre) + '/')
+    elif vnos == 4: #uporabnik želi videti rešitev
+        bottle.redirect('/resitev/' + str(id_igre) + '/')
+
+@bottle.get('/resitev/<id_igre>/')
+def resitev_igre(id_igre):
+    id_igre = int(bottle.request.get_cookie('id_igre', secret=SKRIVNOST))
+    igra = sudoku.igre[id_igre]
+    return bottle.template('Sudoku/resitev.tpl', igra=igra, id_igre=id_igre)
+
+@bottle.post('/resitev_preusmeritev/<id_igre>/')
+def preusmeritev_resitev_igre(id_igre):
+    id_igre = int(bottle.request.get_cookie('id_igre', secret=SKRIVNOST))
+    igra = sudoku.igre[id_igre]
+    vnos = int(bottle.request.forms.getunicode('vnos'))
+    if vnos == 1: #uporabnik želi igrati novo igro
+        bottle.redirect('/domaca_stran/')
+    elif vnos == 2: #uporabnik želi nadaljevati z igro, ki jo je igral
+        bottle.redirect('/igra/' + str(id_igre) + '/')
+    elif vnos == 3: #uporabnik želi igrati isto igro od začetka
+        igra.pocisti()
+        bottle.redirect('/igra/' + str(id_igre) + '/')
+    
     
 
 
 
-# @bottle.get('/poraz/')
+
 
 # @bottle.post('/igra/')
 # def preveri_vnos():

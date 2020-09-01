@@ -4,7 +4,6 @@
 <html>
     <head>
         <title>SUDOKU</title>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
     </head>
 
     <style>

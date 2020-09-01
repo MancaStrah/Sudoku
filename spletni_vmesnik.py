@@ -46,6 +46,7 @@ def vnesi(id_igre):
     bottle.redirect('/igra/' + str(id_igre) + '/')
 
 
+
 @bottle.post('/preveri_zmaga/<id_igre>/')
 def zmaga(id_igre):
     id_igre = int(bottle.request.get_cookie('id_igre', secret=SKRIVNOST))
@@ -58,7 +59,7 @@ def zmaga(id_igre):
 def pocisti(id_igre):
     id_igre = int(bottle.request.get_cookie('id_igre', secret=SKRIVNOST))
     igra = sudoku.igre[id_igre]
-    igra.pocisti()
+    sudoku.pocisti(id_igre)
     bottle.redirect('/igra/' + str(id_igre) + '/')
 
 @bottle.post('/preveri_preusmeritev/<id_igre>/')
@@ -71,7 +72,7 @@ def preusmeritev(id_igre):
     elif vnos == 2: #uporabnik želi nadaljevati z igro, ki jo je igral
         bottle.redirect('/igra/' + str(id_igre) + '/')
     elif vnos == 3: #uporabnik želi igrati isto igro od začetka
-        igra.pocisti()
+        sudoku.pocisti(id_igre)
         bottle.redirect('/igra/' + str(id_igre) + '/')
     elif vnos == 4: #uporabnik želi videti rešitev
         bottle.redirect('/resitev/' + str(id_igre) + '/')
@@ -94,6 +95,20 @@ def preusmeritev_resitev_igre(id_igre):
     elif vnos == 3: #uporabnik želi igrati isto igro od začetka
         igra.pocisti()
         bottle.redirect('/igra/' + str(id_igre) + '/')
+
+# @bottle.post('/preveri_vnos/<id_igre>/')
+# def preveri_vnos(id_igre):
+#     id_igre = int(bottle.request.get_cookie('id_igre', secret=SKRIVNOST))
+#     igra = sudoku.igre[id_igre]
+#     vnos = igra.zadnji_vnos()
+#     if vnos == PRAVILNO:
+#         bottle.redirect('/igra/' + str(id_igre) + '/')
+#     else:
+#         return bottle.template('Sudoku/resitev.tpl', igra=igra, id_igre=id_igre)
+
+
+
+
     
     
 

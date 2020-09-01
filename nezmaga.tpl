@@ -72,7 +72,7 @@
     <body>
         <h1>SUDOKU</h1>
         <div class="obvestilo"> 
-            Žal sudoku ni pravilno izpolnjen. 
+            Žal sudoku ni pravilno izpolnjen :( 
         </div>
         <div >
             <form action="/preveri_preusmeritev/{{id_igre}}/" method="post" >

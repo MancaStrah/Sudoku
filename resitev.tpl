@@ -34,47 +34,381 @@
                 <td>Rešitev:</td>
                 <td>Kako želite nadaljevati?</td>
             </tr>
+
             <tr>
                 <td>
-                    <table class="polje">
-                    % for vrstica in range(1, 10):
+                    <table class="polje" style="width:40%">
                         <tr>
-                            % for stolpec in range(1, 10):
-                                % if igra.zacetni[(vrstica, stolpec)] != 0:
-                                    <td class="poln_kvadratek"> {{igra.zacetni[(vrstica, stolpec)]}} </td>
-                                % elif igra.trenutni [(vrstica, stolpec)] != 0 and igra.zacetni[(vrstica, stolpec)] == 0:
-                                    <td class="vnesen_kvadratek"> 
-                                        {{igra.trenutni[(vrstica, stolpec)]}}
-                                    </td>
-                                % else:
-                                    <td class="prazen_kvadratek"> 
-                                    
-                                    </td>
+                            <td> 
+                                <table>
+                                    % for vrstica in range(1, 4):
+                                    <tr>
+                                        % for stolpec in range(1, 4):
+                                            % if igra.zacetni[(vrstica, stolpec)] != 0:
+                                                <td class="poln_kvadratek"> {{igra.zacetni[(vrstica, stolpec)]}} </td>
+                                            % elif igra.trenutni [(vrstica, stolpec)] != 0 and igra.zacetni[(vrstica, stolpec)] == 0:
+                                                <td class="vnesen_kvadratek"> 
+                                                    {{igra.trenutni[(vrstica, stolpec)]}}
+                                                </td>
+                                            % else:
+                                                <td class="prazen_kvadratek"> 
+                                                </td>
+                                            % end
+                                        % end
+                                    </tr>
+                                    % end
+                                </table>
+                            </td>
+                            <td>
+                                <table>
+                                    % for vrstica in range(1, 4):
+                                    <tr>
+                                        % for stolpec in range(4, 7):
+                                        % if igra.zacetni[(vrstica, stolpec)] != 0:
+                                        <td class="poln_kvadratek"> {{igra.zacetni[(vrstica, stolpec)]}} </td>
+                                    % elif igra.trenutni [(vrstica, stolpec)] != 0 and igra.zacetni[(vrstica, stolpec)] == 0:
+                                        <td class="vnesen_kvadratek"> 
+                                            {{igra.trenutni[(vrstica, stolpec)]}}
+                                        </td>
+                                    % else:
+                                        <td class="prazen_kvadratek"> 
+                                        </td>
+                                    % end
                                 % end
-                            % end
+                            </tr>
+                                    % end
+                                </table>
+                            </td>
+                            <td> 
+                                <table>
+                                    % for vrstica in range(1, 4):
+                                    <tr>
+                                        % for stolpec in range(7, 10):
+                                        % if igra.zacetni[(vrstica, stolpec)] != 0:
+                                        <td class="poln_kvadratek"> {{igra.zacetni[(vrstica, stolpec)]}} </td>
+                                    % elif igra.trenutni [(vrstica, stolpec)] != 0 and igra.zacetni[(vrstica, stolpec)] == 0:
+                                        <td class="vnesen_kvadratek"> 
+                                            {{igra.trenutni[(vrstica, stolpec)]}}
+                                        </td>
+                                    % else:
+                                        <td class="prazen_kvadratek"> 
+                                        </td>
+                                    % end
+                                % end
+                            </tr>
+                                    % end
+                                </table>
+                            </td>
                         </tr>
-                        % end
+                        <tr>
+                            <td> 
+                                <table>
+                                    % for vrstica in range(4, 7):
+                                    <tr>
+                                        % for stolpec in range(1, 4):
+                                        % if igra.zacetni[(vrstica, stolpec)] != 0:
+                                        <td class="poln_kvadratek"> {{igra.zacetni[(vrstica, stolpec)]}} </td>
+                                    % elif igra.trenutni [(vrstica, stolpec)] != 0 and igra.zacetni[(vrstica, stolpec)] == 0:
+                                        <td class="vnesen_kvadratek"> 
+                                            {{igra.trenutni[(vrstica, stolpec)]}}
+                                        </td>
+                                    % else:
+                                        <td class="prazen_kvadratek"> 
+                                        </td>
+                                    % end
+                                % end
+                            </tr>
+                                    % end
+                                </table>
+                            </td>
+                            <td> 
+                                <table>
+                                    % for vrstica in range(4, 7):
+                                    <tr>
+                                        % for stolpec in range(4, 7):
+                                        % if igra.zacetni[(vrstica, stolpec)] != 0:
+                                        <td class="poln_kvadratek"> {{igra.zacetni[(vrstica, stolpec)]}} </td>
+                                    % elif igra.trenutni [(vrstica, stolpec)] != 0 and igra.zacetni[(vrstica, stolpec)] == 0:
+                                        <td class="vnesen_kvadratek"> 
+                                            {{igra.trenutni[(vrstica, stolpec)]}}
+                                        </td>
+                                    % else:
+                                        <td class="prazen_kvadratek"> 
+                                        </td>
+                                    % end
+                                % end
+                            </tr>
+                                    % end
+                                </table>
+                            </td>
+                            <td> 
+                                <table>
+                                    % for vrstica in range(4, 7):
+                                    <tr>
+                                        % for stolpec in range(7, 10):
+                                        % if igra.zacetni[(vrstica, stolpec)] != 0:
+                                        <td class="poln_kvadratek"> {{igra.zacetni[(vrstica, stolpec)]}} </td>
+                                    % elif igra.trenutni [(vrstica, stolpec)] != 0 and igra.zacetni[(vrstica, stolpec)] == 0:
+                                        <td class="vnesen_kvadratek"> 
+                                            {{igra.trenutni[(vrstica, stolpec)]}}
+                                        </td>
+                                    % else:
+                                        <td class="prazen_kvadratek"> 
+                                        </td>
+                                    % end
+                                % end
+                            </tr>
+                                    % end
+                                </table>
+                            </td>  
+                        </tr>
+                        <tr>
+                            <td> 
+                                <table>
+                                    % for vrstica in range(7, 10):
+                                    <tr>
+                                        % for stolpec in range(1, 4):
+                                        % if igra.zacetni[(vrstica, stolpec)] != 0:
+                                        <td class="poln_kvadratek"> {{igra.zacetni[(vrstica, stolpec)]}} </td>
+                                    % elif igra.trenutni [(vrstica, stolpec)] != 0 and igra.zacetni[(vrstica, stolpec)] == 0:
+                                        <td class="vnesen_kvadratek"> 
+                                            {{igra.trenutni[(vrstica, stolpec)]}}
+                                        </td>
+                                    % else:
+                                        <td class="prazen_kvadratek"> 
+                                        </td>
+                                    % end
+                                % end
+                            </tr>
+                                    % end
+                                </table>
+                            </td>
+                            <td> 
+                                <table>
+                                    % for vrstica in range(7, 10):
+                                    <tr>
+                                        % for stolpec in range(4, 7):
+                                        % if igra.zacetni[(vrstica, stolpec)] != 0:
+                                        <td class="poln_kvadratek"> {{igra.zacetni[(vrstica, stolpec)]}} </td>
+                                    % elif igra.trenutni [(vrstica, stolpec)] != 0 and igra.zacetni[(vrstica, stolpec)] == 0:
+                                        <td class="vnesen_kvadratek"> 
+                                            {{igra.trenutni[(vrstica, stolpec)]}}
+                                        </td>
+                                    % else:
+                                        <td class="prazen_kvadratek"> 
+                                        </td>
+                                    % end
+                                % end
+                            </tr>
+                                    % end
+                                </table>
+                            </td>
+                            <td> 
+                                <table>
+                                    % for vrstica in range(7, 10):
+                                    <tr>
+                                        % for stolpec in range(7, 10):
+                                        % if igra.zacetni[(vrstica, stolpec)] != 0:
+                                        <td class="poln_kvadratek"> {{igra.zacetni[(vrstica, stolpec)]}} </td>
+                                    % elif igra.trenutni [(vrstica, stolpec)] != 0 and igra.zacetni[(vrstica, stolpec)] == 0:
+                                        <td class="vnesen_kvadratek"> 
+                                            {{igra.trenutni[(vrstica, stolpec)]}}
+                                        </td>
+                                    % else:
+                                        <td class="prazen_kvadratek"> 
+                                        </td>
+                                    % end
+                                % end
+                            </tr>
+                                    % end
+                                </table>
+                            </td>  
+                        </tr>           
                     </table>
                 </td>
+
                 <td>
-                    <table class="polje">
-                        % for vrstica in range(1, 10):
-                            <tr>
-                            % for stolpec in range(1, 10):
-                                % if igra.zacetni[(vrstica, stolpec)] != 0:
-                                    <td class="poln_kvadratek"> 
-                                        {{igra.zacetni[(vrstica, stolpec)]}} 
-                                    </td>
-                                % else: 
-                                    <td class="vnesen_kvadratek">
-                                        {{igra.resitve[(vrstica, stolpec)]}}
-                                    </td>
+                    <table class="polje" style="width:40%">
+                        <tr>
+                            <td> 
+                                <table>
+                                    % for vrstica in range(1, 4):
+                                    <tr>
+                                        % for stolpec in range(1, 4):
+                                        % if igra.zacetni[(vrstica, stolpec)] != 0:
+                                        <td class="poln_kvadratek"> 
+                                            {{igra.zacetni[(vrstica, stolpec)]}} 
+                                        </td>
+                                    % else: 
+                                        <td class="vnesen_kvadratek">
+                                            {{igra.resitve[(vrstica, stolpec)]}}
+                                        </td>
+                                    % end
                                 % end
-                            % end
-                            </tr>
-                        % end
-                   </table>
+                                </tr>
+                                    % end
+                                </table>
+                            </td>
+                            <td>
+                                <table>
+                                    % for vrstica in range(1, 4):
+                                    <tr>
+                                        % for stolpec in range(4, 7):
+                                        % if igra.zacetni[(vrstica, stolpec)] != 0:
+                                        <td class="poln_kvadratek"> 
+                                            {{igra.zacetni[(vrstica, stolpec)]}} 
+                                        </td>
+                                    % else: 
+                                        <td class="vnesen_kvadratek">
+                                            {{igra.resitve[(vrstica, stolpec)]}}
+                                        </td>
+                                    % end
+                                % end
+                                </tr>
+                                    % end
+                                </table>
+                            </td>
+                            <td> 
+                                <table>
+                                    % for vrstica in range(1, 4):
+                                    <tr>
+                                        % for stolpec in range(7, 10):
+                                        % if igra.zacetni[(vrstica, stolpec)] != 0:
+                                        <td class="poln_kvadratek"> 
+                                            {{igra.zacetni[(vrstica, stolpec)]}} 
+                                        </td>
+                                    % else: 
+                                        <td class="vnesen_kvadratek">
+                                            {{igra.resitve[(vrstica, stolpec)]}}
+                                        </td>
+                                    % end
+                                % end
+                                </tr>
+                                    % end
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td> 
+                                <table>
+                                    % for vrstica in range(4, 7):
+                                    <tr>
+                                        % for stolpec in range(1, 4):
+                                        % if igra.zacetni[(vrstica, stolpec)] != 0:
+                                        <td class="poln_kvadratek"> 
+                                            {{igra.zacetni[(vrstica, stolpec)]}} 
+                                        </td>
+                                    % else: 
+                                        <td class="vnesen_kvadratek">
+                                            {{igra.resitve[(vrstica, stolpec)]}}
+                                        </td>
+                                    % end
+                                % end
+                                </tr>
+                                    % end
+                                </table>
+                            </td>
+                            <td> 
+                                <table>
+                                    % for vrstica in range(4, 7):
+                                    <tr>
+                                        % for stolpec in range(4, 7):
+                                        % if igra.zacetni[(vrstica, stolpec)] != 0:
+                                        <td class="poln_kvadratek"> 
+                                            {{igra.zacetni[(vrstica, stolpec)]}} 
+                                        </td>
+                                    % else: 
+                                        <td class="vnesen_kvadratek">
+                                            {{igra.resitve[(vrstica, stolpec)]}}
+                                        </td>
+                                    % end
+                                % end
+                                </tr>
+                                    % end
+                                </table>
+                            </td>
+                            <td> 
+                                <table>
+                                    % for vrstica in range(4, 7):
+                                    <tr>
+                                        % for stolpec in range(7, 10):
+                                        % if igra.zacetni[(vrstica, stolpec)] != 0:
+                                        <td class="poln_kvadratek"> 
+                                            {{igra.zacetni[(vrstica, stolpec)]}} 
+                                        </td>
+                                    % else: 
+                                        <td class="vnesen_kvadratek">
+                                            {{igra.resitve[(vrstica, stolpec)]}}
+                                        </td>
+                                    % end
+                                % end
+                                </tr>
+                                    % end
+                                </table>
+                            </td>  
+                        </tr>
+                        <tr>
+                            <td> 
+                                <table>
+                                    % for vrstica in range(7, 10):
+                                    <tr>
+                                        % for stolpec in range(1, 4):
+                                        % if igra.zacetni[(vrstica, stolpec)] != 0:
+                                        <td class="poln_kvadratek"> 
+                                            {{igra.zacetni[(vrstica, stolpec)]}} 
+                                        </td>
+                                    % else: 
+                                        <td class="vnesen_kvadratek">
+                                            {{igra.resitve[(vrstica, stolpec)]}}
+                                        </td>
+                                    % end
+                                % end
+                                </tr>
+                                    % end
+                                </table>
+                            </td>
+                            <td> 
+                                <table>
+                                    % for vrstica in range(7, 10):
+                                    <tr>
+                                        % for stolpec in range(4, 7):
+                                        % if igra.zacetni[(vrstica, stolpec)] != 0:
+                                        <td class="poln_kvadratek"> 
+                                            {{igra.zacetni[(vrstica, stolpec)]}} 
+                                        </td>
+                                    % else: 
+                                        <td class="vnesen_kvadratek">
+                                            {{igra.resitve[(vrstica, stolpec)]}}
+                                        </td>
+                                    % end
+                                % end
+                                </tr>
+                                    % end
+                                </table>
+                            </td>
+                            <td> 
+                                <table>
+                                    % for vrstica in range(7, 10):
+                                    <tr>
+                                        % for stolpec in range(7, 10):
+                                        % if igra.zacetni[(vrstica, stolpec)] != 0:
+                                        <td class="poln_kvadratek"> 
+                                            {{igra.zacetni[(vrstica, stolpec)]}} 
+                                        </td>
+                                    % else: 
+                                        <td class="vnesen_kvadratek">
+                                            {{igra.resitve[(vrstica, stolpec)]}}
+                                        </td>
+                                    % end
+                                % end
+                                </tr>
+                                    % end
+                                </table>
+                            </td>  
+                        </tr>           
+                    </table>
                 </td>
+
                 <td>
                     <form action="/resitev_preusmeritev/{{id_igre}}/" method="post" >
                         <input type="radio" id="2" name="vnos" value='2'>

@@ -4,6 +4,7 @@
 <html>
     <head>
         <title>SUDOKU</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
     </head>
 
     <style>
@@ -79,14 +80,13 @@
             display: inline-block;
             font-size: 15px;    
         }
-    
         
     </style>
 
     <body>
         <h1>SUDOKU</h1>
      
-    <table style="width: fit-content" >
+    <table style="width: fit-content; padding-left: 50px" >
         <tr>
           <td>
             <table class="polje">
@@ -345,7 +345,11 @@
           <td>
             <table>
                 <tr>
-                    <p class="navodilo">Za vnos števila v polje na levi izberite polje, <br> vanj vnesite izbrano število in pritisnite enter.</p>
+                    <p class="navodilo">Za vnos števila v polje na levi izberite polje, <br> 
+                        vanj vnesite izbrano število in pritisnite enter. <br><br>
+                        Ko se polje obarva oranžno, je vaš vnos zabeležen. <br>
+                        Kasneje ga lahko spremenite.
+                    </p>
                 </tr>
                 <tr>
                     <p class="navodilo">Preverite, ali ste sudoku rešili pravilno. <br>

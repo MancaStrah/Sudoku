@@ -30,12 +30,15 @@ class Igra:
             self.moznosti = moznosti
         #vrne vse celice v istem stolpcu, vrstici ali kvadratku, ki imajo enako vrednost kot dana celica
         self.napake = {(i,j): set() for i in range(1, 10) for j in range(1, 10)}
+        self.zadnji_vnos = ()
+     
 
     def __repr__(self):
         '''Vrne obliko (rešitve, začetno polje, trenutno polje, vnešene možnosti).'''
         return  repr((self.resitve, self.zacetni, self.trenutni, self.moznosti))
         
     def zmaga(self):
+        '''Preveri, ali je sudoku izpolnjen pravilno. '''
         return self.trenutni == self.resitve    
 
     def vnos(self, celica, stevilo):
@@ -45,6 +48,7 @@ class Igra:
             return FIKSNO_POLJE
         else:
             self.trenutni[celica] = stevilo
+            self.zadnji_vnos = (celica, stevilo)
         if self.zmaga:
             return ZMAGA
         return USPESEN_VNOS
@@ -138,7 +142,8 @@ class Igra:
 
     def pocisti(self):
         '''Začne isto igro od začetka'''
-        self.trenutni = self.zacetni
+        slovar = self.zacetni
+        self.trenutni = slovar
 
 
 class Sudoku:
@@ -193,11 +198,20 @@ class Sudoku:
     def preveri_vnos(self, id_igre, celica):
         igra = self.igre[id_igre]
         return igra.preveri_vnos(celica)
+
+    def pocisti(self, id_igre):
+        self.nalozi_igre_iz_datoteke()
+        igra = self.igre[id_igre]
+        igra.pocisti()
+        self.igre[id_igre] = igra
+        self.zapisi_igre_v_datoteko()
+        return USPESEN_VNOS
+        
         
     def zapisi_igre_v_datoteko(self):
         with open(self.datoteka_s_stanjem, 'w', encoding='utf-8') as f:
             seznam = {id_igre: (igra.resitve, igra.zacetni, igra.trenutni, igra.moznosti)
-                     for id_igre, igra in self.igre.items()}
+                     for id_igre, igra in self.igre.items()} #hm
             print(self.igre.items())
             json.dump(str(seznam), f)
         

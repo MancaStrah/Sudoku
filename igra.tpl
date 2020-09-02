@@ -12,7 +12,6 @@
             font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
         }
 
-
         body {
             background-color: #FFEFD5;
             margin: auto;
@@ -60,6 +59,7 @@
         .polje {
             border: 7px solid  #4d2e00;
             border-color: #4d2e00;
+            background-color:#4d2e00 ;
             border-width: 5px;
             border-inline-end-color:#4d2e00 ;
             width: 60%;
@@ -107,7 +107,6 @@
         td {
             text-align: center;
         }
-        
     </style>
 
     <body style="text-align: center;">
@@ -128,14 +127,14 @@
                                     % elif igra.trenutni [(vrstica, stolpec)] != 0 and igra.zacetni[(vrstica, stolpec)] == 0:
                                         <td> 
                                         <form action="/igra/{{id_igre}}/" method="post">
-                                        <input type="number" class="izpolnjen_gumb" id="stevilo" name="stevilo" appearance="none", value="{{igra.trenutni[(vrstica, stolpec)]}}">
+                                        <input type="number" class="izpolnjen_gumb" id="stevilo" name="stevilo" appearance="none" value="{{igra.trenutni[(vrstica, stolpec)]}}" required>
                                         <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
                                         </form>
                                         </td>
                                     % else:
                                     <td> 
                                         <form action="/igra/{{id_igre}}/" method="post">
-                                        <input type="number" class ="prazen_gumb" id="stevilo" name="stevilo" appearance="none">
+                                        <input type="number" class ="prazen_gumb" id="stevilo" name="stevilo" appearance="none" required>
                                         <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
                                         </form>
                                     </td>
@@ -155,14 +154,14 @@
                                     % elif igra.trenutni [(vrstica, stolpec)] != 0 and igra.zacetni[(vrstica, stolpec)] == 0:
                                         <td> 
                                         <form action="/igra/{{id_igre}}/" method="post">
-                                        <input type="number" class="izpolnjen_gumb" id="stevilo" name="stevilo" appearance="none", value="{{igra.trenutni[(vrstica, stolpec)]}}">
+                                        <input type="number" class="izpolnjen_gumb" id="stevilo" name="stevilo" appearance="none", value="{{igra.trenutni[(vrstica, stolpec)]}}" required>
                                         <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
                                         </form>
                                         </td>
                                     % else:
                                     <td> 
                                         <form action="/igra/{{id_igre}}/" method="post">
-                                        <input type="number" class ="prazen_gumb" id="stevilo" name="stevilo" appearance="none">
+                                        <input type="number" class ="prazen_gumb" id="stevilo" name="stevilo" appearance="none" required>
                                         <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
                                         </form>
                                     </td>
@@ -182,14 +181,14 @@
                                     % elif igra.trenutni [(vrstica, stolpec)] != 0 and igra.zacetni[(vrstica, stolpec)] == 0:
                                         <td> 
                                         <form action="/igra/{{id_igre}}/" method="post">
-                                        <input type="number" class="izpolnjen_gumb" id="stevilo" name="stevilo" appearance="none", value="{{igra.trenutni[(vrstica, stolpec)]}}">
+                                        <input type="number" class="izpolnjen_gumb" id="stevilo" name="stevilo" appearance="none", value="{{igra.trenutni[(vrstica, stolpec)]}}" required>
                                         <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
                                         </form>
                                         </td>
                                     % else:
                                     <td> 
                                         <form action="/igra/{{id_igre}}/" method="post">
-                                        <input type="number" class ="prazen_gumb" id="stevilo" name="stevilo" appearance="none">
+                                        <input type="number" class ="prazen_gumb" id="stevilo" name="stevilo" appearance="none" required>
                                         <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
                                         </form>
                                     </td>
@@ -211,14 +210,14 @@
                                     % elif igra.trenutni [(vrstica, stolpec)] != 0 and igra.zacetni[(vrstica, stolpec)] == 0:
                                         <td> 
                                         <form action="/igra/{{id_igre}}/" method="post">
-                                        <input type="number" class="izpolnjen_gumb" id="stevilo" name="stevilo" appearance="none", value="{{igra.trenutni[(vrstica, stolpec)]}}">
+                                        <input type="number" class="izpolnjen_gumb" id="stevilo" name="stevilo" appearance="none", value="{{igra.trenutni[(vrstica, stolpec)]}}" required>
                                         <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
                                         </form>
                                         </td>
                                     % else:
                                     <td> 
                                         <form action="/igra/{{id_igre}}/" method="post">
-                                        <input type="number" class ="prazen_gumb" id="stevilo" name="stevilo" appearance="none">
+                                        <input type="number" class ="prazen_gumb" id="stevilo" name="stevilo" appearance="none" required>
                                         <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
                                         </form>
                                     </td>
@@ -238,14 +237,14 @@
                                     % elif igra.trenutni [(vrstica, stolpec)] != 0 and igra.zacetni[(vrstica, stolpec)] == 0:
                                         <td> 
                                         <form action="/igra/{{id_igre}}/" method="post">
-                                        <input type="number" class="izpolnjen_gumb" id="stevilo" name="stevilo" appearance="none", value="{{igra.trenutni[(vrstica, stolpec)]}}">
+                                        <input type="number" class="izpolnjen_gumb" id="stevilo" name="stevilo" appearance="none", value="{{igra.trenutni[(vrstica, stolpec)]}}" required>
                                         <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
                                         </form>
                                         </td>
                                     % else:
                                     <td> 
                                         <form action="/igra/{{id_igre}}/" method="post">
-                                        <input type="number" class ="prazen_gumb" id="stevilo" name="stevilo" appearance="none">
+                                        <input type="number" class ="prazen_gumb" id="stevilo" name="stevilo" appearance="none" required>
                                         <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
                                         </form>
                                     </td>
@@ -265,14 +264,14 @@
                                     % elif igra.trenutni [(vrstica, stolpec)] != 0 and igra.zacetni[(vrstica, stolpec)] == 0:
                                         <td> 
                                         <form action="/igra/{{id_igre}}/" method="post">
-                                        <input type="number" class="izpolnjen_gumb" id="stevilo" name="stevilo" appearance="none", value="{{igra.trenutni[(vrstica, stolpec)]}}">
+                                        <input type="number" class="izpolnjen_gumb" id="stevilo" name="stevilo" appearance="none", value="{{igra.trenutni[(vrstica, stolpec)]}}" required>
                                         <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
                                         </form>
                                         </td>
                                     % else:
                                     <td> 
                                         <form action="/igra/{{id_igre}}/" method="post">
-                                        <input type="number" class ="prazen_gumb" id="stevilo" name="stevilo" appearance="none">
+                                        <input type="number" class ="prazen_gumb" id="stevilo" name="stevilo" appearance="none" required>
                                         <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
                                         </form>
                                     </td>
@@ -294,14 +293,14 @@
                                     % elif igra.trenutni [(vrstica, stolpec)] != 0 and igra.zacetni[(vrstica, stolpec)] == 0:
                                         <td> 
                                         <form action="/igra/{{id_igre}}/" method="post">
-                                        <input type="number" class="izpolnjen_gumb" id="stevilo" name="stevilo" appearance="none", value="{{igra.trenutni[(vrstica, stolpec)]}}">
+                                        <input type="number" class="izpolnjen_gumb" id="stevilo" name="stevilo" appearance="none", value="{{igra.trenutni[(vrstica, stolpec)]}}" required>
                                         <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
                                         </form>
                                         </td>
                                     % else:
                                     <td> 
                                         <form action="/igra/{{id_igre}}/" method="post">
-                                        <input type="number" class ="prazen_gumb" id="stevilo" name="stevilo" appearance="none">
+                                        <input type="number" class ="prazen_gumb" id="stevilo" name="stevilo" appearance="none" required>
                                         <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
                                         </form>
                                     </td>
@@ -321,14 +320,14 @@
                                     % elif igra.trenutni [(vrstica, stolpec)] != 0 and igra.zacetni[(vrstica, stolpec)] == 0:
                                         <td> 
                                         <form action="/igra/{{id_igre}}/" method="post">
-                                        <input type="number" class="izpolnjen_gumb" id="stevilo" name="stevilo" appearance="none", value="{{igra.trenutni[(vrstica, stolpec)]}}">
+                                        <input type="number" class="izpolnjen_gumb" id="stevilo" name="stevilo" appearance="none", value="{{igra.trenutni[(vrstica, stolpec)]}}" required>
                                         <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
                                         </form>
                                         </td>
                                     % else:
                                     <td> 
                                         <form action="/igra/{{id_igre}}/" method="post">
-                                        <input type="number" class ="prazen_gumb" id="stevilo" name="stevilo" appearance="none">
+                                        <input type="number" class ="prazen_gumb" id="stevilo" name="stevilo" appearance="none" required>
                                         <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
                                         </form>
                                     </td>
@@ -348,14 +347,14 @@
                                     % elif igra.trenutni [(vrstica, stolpec)] != 0 and igra.zacetni[(vrstica, stolpec)] == 0:
                                         <td> 
                                         <form action="/igra/{{id_igre}}/" method="post">
-                                        <input type="number" class="izpolnjen_gumb" id="stevilo" name="stevilo" appearance="none", value="{{igra.trenutni[(vrstica, stolpec)]}}">
+                                        <input type="number" class="izpolnjen_gumb" id="stevilo" name="stevilo" appearance="none", value="{{igra.trenutni[(vrstica, stolpec)]}}" required>
                                         <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
                                         </form>
                                         </td>
                                     % else:
                                     <td> 
                                         <form action="/igra/{{id_igre}}/" method="post">
-                                        <input type="number" class ="prazen_gumb" id="stevilo" name="stevilo" appearance="none">
+                                        <input type="number" class ="prazen_gumb" id="stevilo" name="stevilo" appearance="none" required>
                                         <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
                                         </form>
                                     </td>

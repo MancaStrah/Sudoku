@@ -2,8 +2,7 @@
 
 <html>
     <head>
-        <title>SUDOKU</title>
-        
+        <title>SUDOKU</title>   
     </head>
 
     <style>
@@ -12,23 +11,22 @@
             font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
         }
 
-
         body {
             background-color: #FFEFD5;
             margin: auto;
-        }
+            }
         
         h1 {
-            font-size: 120px;
+            font-size: 100px;
             color: #4d2e00;
             font-weight: bold; 
-            padding-top: 100px;
+            padding-top: 80px;
             padding-bottom: 50px;
             text-align: center;
         }
 
         .center {
-            padding-top: 130px;
+            padding-top: 10px;
             text-align: center;
             }
         
@@ -42,16 +40,14 @@
             display: inline-block;
             font-size: 30px;    
         }
-    
-    
-   
+
     </style>
 
     <body>
         <h1>SUDOKU</h1>
 
-        <div style="align-content: center">
-            <img src="../views/kava.jpg" alt="kava"> 
+        <div class='center'>
+            <img src="https://foodstuffmall.com/wp-content/uploads/2020/02/Make-Your-Celebrations-a-Bit-More-Joyful-By-Serving-Coffee.jpg" alt="kava" style="height:200px; padding: 15px">
         </div>
 
         <div class='center'>

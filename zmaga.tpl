@@ -79,7 +79,7 @@
             <form action="/preveri_preusmeritev/{{id_igre}}/" method="post" >
                 <p>Kaj želite sedaj?</p>
                 <div  class="center" >
-                    <input type="radio" id="1" name="vnos" value=1>
+                    <input type="radio" id="1" name="vnos" value=1 required>
                     <label for="1">nova igra</label>
 
                     <input type="radio" id="4" name="vnos" value=4>

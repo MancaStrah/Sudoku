@@ -7,6 +7,7 @@
         
     </head>
 
+
     <style>
         body, html {
             height: 100%;
@@ -64,7 +65,11 @@
     </style>
 
     <body style="text-align:center" >
-        <h1>SUDOKU</h1>
+
+        <h1>
+            SUDOKU
+        </h1>
+
         <div> 
             <p class="pozdrav">Pozdravljeni.</p>
             <form action="/nova_igra/" method="post" >

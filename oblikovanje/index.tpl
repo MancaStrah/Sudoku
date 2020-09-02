@@ -50,6 +50,10 @@
     <body>
         <h1>SUDOKU</h1>
 
+        <div style="align-content: center">
+            <img src="../views/kava.jpg" alt="kava"> 
+        </div>
+
         <div class='center'>
         <form action='/' method='post'>
             <button type='submit' class="gumb">vstopi</button>

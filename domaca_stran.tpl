@@ -4,12 +4,13 @@
 <html>
     <head>
         <title>SUDOKU</title>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
+        
     </head>
 
     <style>
         body, html {
             height: 100%;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
         }
 
         body {
@@ -41,7 +42,7 @@
         }
 
         .gumb {
-            background-color: #995900; 
+            background-color: #995900;
             border: none;
             color: white;
             padding: 10px 15px;
@@ -69,7 +70,7 @@
             <form action="/nova_igra/" method="post" >
                     <p>Prosimo, izberite težavnost:</p>
                     <div>
-                        <input type="radio" id="1" name="tezavnost" value=1>
+                        <input type="radio" id="1" name="tezavnost" value=1 required>
                         <label for="1">lahka</label>
                         
                         <input type="radio" id="2" name="tezavnost" value=2>

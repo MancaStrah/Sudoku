@@ -7,9 +7,11 @@
     </head>
 
     <style>
-        body, html {
+         body, html {
             height: 100%;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
         }
+
 
         body {
             background-color: #FFEFD5;
@@ -39,34 +41,52 @@
         }
 
         .prazen_gumb {
-            background-color: #fff4e6;
-            width: 20px;
+            border-color: none;
+            border: none;
+            background-color: #ffffff;
+            width: 35px;
+            height: 35px;
         }
 
         .izpolnjen_gumb{
+            border-color: none;
+            border: none;
             background-color: #ffdeb3;
-            width: 20px;
+            text-align: center;
+            width: 35px;
+            height: 35px;
         }
 
         .polje {
             border: 7px solid  #4d2e00;
             border-color: #4d2e00;
-            border-width: 2px;
+            border-width: 5px;
             border-inline-end-color:#4d2e00 ;
+            width: 60%;
+            height: 60%;
+
+        }
+
+        h2 {
+            color: #4d2e00;
+            font-weight: bolder;
+            padding-bottom: 4px;
+            padding-left: 100px;
+            text-align: left;
         }
 
         .poln_kvadratek {
-            border: 2px solid #4d2e00;
+            border-color: none;
             background-color: #ffc880;
-            width: 20px;
-
+            width: 35px;
+            height: 35px;
         }
 
         .navodilo {
             font-size: 16px;
             color: #4d2e00;
-            padding: 15px;
-            text-align: center;
+            text-align: left;
+            padding-left: 100px;
         }
 
         .gumb {
@@ -79,13 +99,21 @@
             display: inline-block;
             font-size: 15px;    
         }
+
+        tr {
+            text-align: center;
+        }
+
+        td {
+            text-align: center;
+        }
         
     </style>
 
-    <body>
+    <body style="text-align: center;">
         <h1>SUDOKU</h1>
      
-    <table style="width: fit-content; padding-left: 50px" >
+    <table style="width: 80%; height: 60%; padding-left: 250px; padding-right: 50px;" >
         <tr>
           <td>
             <table class="polje">
@@ -344,24 +372,28 @@
           <td>
             <table>
                 <tr>
+                    <h2>NAVODILA</h2>
                     <p class="navodilo">Za vnos števila v polje na levi izberite polje, <br> 
                         vanj vnesite izbrano število in pritisnite enter. <br><br>
-                        Ko se polje obarva oranžno, je vaš vnos zabeležen. <br>
+                        Ko se polje obarva, je vaš vnos zabeležen. <br>
                         Kasneje ga lahko spremenite.
                     </p>
                 </tr>
                 <tr>
-                    <p class="navodilo">Preverite, ali ste sudoku rešili pravilno. <br>
-                    <form action="/preveri_zmaga/{{id_igre}}/" method="post">
-                        <button class="gumb" type="submit">preveri</button>
-                    </form>
-                </p>
-                </tr>
+                    <br>
+                    <br>
+                    <p class="navodilo" style="padding-bottom: 7px">Preverite, ali ste sudoku rešili pravilno: <br><br>
+                        <form action="/preveri_zmaga/{{id_igre}}/" method="post">
+                            <button class="gumb" style="padding-top: 7px" type="submit">preveri</button>
+                        </form>
+                    </p>
+                    </tr>
                 
                 <tr>
-                    <p class="navodilo">Počistite polje in začnite od začetka. <br>
+                    <br>
+                    <p class="navodilo" style="padding-bottom: 7px">Počistite polje in začnite od začetka: <br><br>
                      <form action="/pocisti_igro/{{id_igre}}/" method="post">
-                        <button class="gumb" type="submit">počisti</button>
+                        <button class="gumb" style="padding-top: 7px" type="submit">počisti</button>
                     </form>  
                 </p>
                 </tr>

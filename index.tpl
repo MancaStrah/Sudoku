@@ -3,13 +3,15 @@
 <html>
     <head>
         <title>SUDOKU</title>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
+        
     </head>
 
     <style>
         body, html {
             height: 100%;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
         }
+
 
         body {
             background-color: #FFEFD5;
@@ -17,16 +19,16 @@
         }
         
         h1 {
-            font-size: 170px;
+            font-size: 120px;
             color: #4d2e00;
             font-weight: bold; 
-            padding-top: 150px;
+            padding-top: 100px;
             padding-bottom: 50px;
             text-align: center;
         }
 
         .center {
-            padding: 150px;
+            padding-top: 130px;
             text-align: center;
             }
         

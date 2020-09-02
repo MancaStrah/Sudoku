@@ -10,7 +10,9 @@
     <style>
         body, html {
             height: 100%;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
         }
+
 
         body {
             background-color: #FFEFD5;
@@ -39,28 +41,35 @@
             border-inline-color: #4d2e00;
         }
 
-        .prazen_gumb {
+        .prazen_kvadratek {
+            border-color: none;
             background-color: #fff4e6;
-            width: 20px;
+            width: 35px;
+            height: 35px;
         }
 
-        .izpolnjen_gumb{
+        .vnesen_kvadratek{
+            border-color: none;
             background-color: #ffdeb3;
-            width: 20px;
+            text-align: center;
+            width: 35px;
+            height: 35px;
         }
 
         .polje {
             border: 7px solid  #4d2e00;
             border-color: #4d2e00;
-            border-width: 2px;
+            border-width: 5px;
             border-inline-end-color:#4d2e00 ;
+            width:80%;
+            height:80%;
         }
 
         .poln_kvadratek {
-            border: 2px solid #4d2e00;
+            border: none;
             background-color: #ffc880;
-            width: 20px;
-
+            width: 35px;
+            height: 35px;
         }
 
         .navodilo {
@@ -80,38 +89,52 @@
             display: inline-block;
             font-size: 15px;    
         }
-        
-        td {
-            width: 10%;
-            height: 10%;
+
+        .vnesen_kvadratek_narobe {
+            color: red;
+            font-weight: bold;
+            width: 35px;
+            height: 35px;
+            text-align: center;
         }
-    
+        
+
+     
+
         
     </style>
    
     <body>
         <h1>SUDOKU</h1>
-        <table style="padding: 100px; width: 100%">
+
+        <table style="width: 80%; height: 60%; padding-left: 250px; padding-right: 50px;">
             <tr>
                 <td>Vaš vnos:</td>
                 <td>Rešitev:</td>
-                <td>Kako želite nadaljevati?</td>
+                <td></td>
             </tr>
 
             <tr>
                 <td>
-                    <table class="polje" style="width:40%">
+                    <table class="polje" >
                       % for vrstica in range(1, 10):
                           <tr>
                               % for stolpec in range(1, 10):
                                   % if igra.zacetni[(vrstica, stolpec)] != 0:
-                                      <td class="poln_kvadratek"> {{igra.zacetni[(vrstica, stolpec)]}} </td>
+                                      <td class="poln_kvadratek" style="text-align: center"> {{igra.zacetni[(vrstica, stolpec)]}} </td>
                                   % elif igra.trenutni [(vrstica, stolpec)] != 0 and igra.zacetni[(vrstica, stolpec)] == 0:
-                                      <td class="vnesen_kvadratek"> 
-                                          {{igra.trenutni[(vrstica, stolpec)]}}
-                                      </td>
+                                    % if igra.trenutni [(vrstica, stolpec)] ==  igra.resitve[(vrstica, stolpec)]:
+                                        <td class="vnesen_kvadratek" style="text-align: center"> 
+                                            {{igra.trenutni[(vrstica, stolpec)]}}
+                                        </td>
+                                    % elif igra.trenutni [(vrstica, stolpec)] !=  igra.resitve[(vrstica, stolpec)]:
+                                    <td class="vnesen_kvadratek_narobe" style="text-align: center"> 
+                                        {{igra.trenutni[(vrstica, stolpec)]}}
+                                    </td>
+                                    % end
+
                                   % else:
-                                      <td class="prazen_kvadratek"> 
+                                      <td class="prazen_kvadratek" style="text-align: center"> 
                                           -
                                       </td>
                                   % end
@@ -121,16 +144,16 @@
                     </table>
                 </td>
                 <td>
-                    <table class="polje" style="width:40%">
+                    <table class="polje">
                         % for vrstica in range(1, 10):
                         <tr>
                             % for stolpec in range(1, 10):
                                 % if igra.zacetni[(vrstica, stolpec)] != 0:
-                                    <td class="poln_kvadratek"> 
+                                    <td class="poln_kvadratek" style="text-align: center"> 
                                         {{igra.zacetni[(vrstica, stolpec)]}} 
                                     </td>
                                 % else: 
-                                    <td class="vnesen_kvadratek">
+                                    <td class="vnesen_kvadratek" style="text-align: center">
                                         {{igra.resitve[(vrstica, stolpec)]}}
                                     </td>
                                 % end
@@ -140,8 +163,11 @@
                     </table>
                 </td>
                 <td>
+                    <p>
+                        Kako želite nadaljevati?
+                    </p>
                     <form action="/resitev_preusmeritev/{{id_igre}}/" method="post" >
-                        <input type="radio" id="2" name="vnos" value='2'>
+                        <input type="radio" id="2" name="vnos" value='2' required>
                         <label for="2">nazaj na igro</label> 
                         <br>
                         <input type="radio" id="1" name="vnos" value='1'>

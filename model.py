@@ -10,9 +10,7 @@ ZACETEK = '!'
 NEVELJAVNA_IZBIRA = 'L'
 USPESEN_VNOS = 'OK'
 ZMAGA = 'W'
-
-
-    
+ 
 class Igra:
      
     def __init__(self, seznam, trenutni=None, napake=None, zadnji_vnos=None): #Seznam je oblike (začetni sudoku, rešitev)
@@ -40,6 +38,8 @@ class Igra:
         return self.trenutni == self.resitve    
 
     def vnos(self, celica, stevilo):
+        '''Preveri, ali je znak veljaven, in ga vnese v celico,
+        če ta ni fiksna.'''
         if stevilo not in (1,2,3,4,5,6,7,8,9):
             return NAPACEN_ZNAK
         if self.zacetni[celica] != 0:
@@ -97,7 +97,6 @@ class Igra:
         self.napake[(celica)].update(napacne_celice)
         return NAROBE
 
- 
     def preveri_kvadratek(self, celica):
         '''Preveri, ali se število v celici že pojavi
         v  pripadajočem 3 x 3 kvadratku. '''
@@ -114,7 +113,6 @@ class Igra:
         self.napake[(celica)].update(napacne_celice)
         return NAROBE
 
-
     def preveri_vnos(self, celica):
         '''Preveri, ali je vnešeno število pravilno glede na
         ostala trenutno vnešena števila (in ne glede na rešitev).
@@ -124,7 +122,6 @@ class Igra:
         s = self.preveri_stolpec(celica)
         k = self.preveri_kvadratek(celica)
         return self.napake[celica] 
-        
 
     def pocisti(self):
         '''Začne isto igro od začetka'''
@@ -198,11 +195,10 @@ class Sudoku:
         self.zapisi_igre_v_datoteko()
         return USPESEN_VNOS
         
-        
     def zapisi_igre_v_datoteko(self):
         with open(self.datoteka_s_stanjem, 'w', encoding='utf-8') as f:
             seznam = {id_igre: (igra.resitve, igra.zacetni, igra.trenutni, igra.napake, igra.zadnji_vnos)
-                     for id_igre, igra in self.igre.items()} #hm
+                     for id_igre, igra in self.igre.items()} 
             print(self.igre.items())
             json.dump(str(seznam), f)
         

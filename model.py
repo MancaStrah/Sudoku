@@ -22,14 +22,10 @@ class Igra:
             self.trenutni = seznam[0]
         else:
             self.trenutni = trenutni
-        #Slovar, v katerega bodo vnešene vrednosti, za katere igralec meni, da bi se 
-        #lahko pojavile v določeni celici.
         if napake is None:
             self.napake = {(i,j): set() for i in range(1, 10) for j in range(1, 10)}
         else: 
             self.napake = napake
-        #vrne vse celice v istem stolpcu, vrstici ali kvadratku, ki imajo enako vrednost kot dana celica
-        # self.napake = 
         if zadnji_vnos is None:
             self.zadnji_vnos = ()
         else:
@@ -53,15 +49,6 @@ class Igra:
         self.zadnji_vnos = (celica, stevilo)
         return USPESEN_VNOS
     
-
-    def moznost(self, celica, stevilo):
-        if stevilo not in (1,2,3,4,5,6,7,8,9):
-            return NAPACEN_ZNAK
-        if self.zacetni[celica] != 0:
-            return FIKSNO_POLJE
-        else:
-            self.moznosti[celica].add(stevilo)
-
     def kvadratek(self, celica):
         '''Določi, v katerem večjem 3 x 3 kvadratku
         se nahaja celica. '''

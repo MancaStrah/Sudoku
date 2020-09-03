@@ -36,21 +36,7 @@
         table {
             border-inline-color: #4d2e00;
         }
-        .prazen_gumb {
-            border-color: none;
-            border: none;
-            background-color: #ffffff;
-            width: 35px;
-            height: 35px;
-        }
-        .izpolnjen_gumb{
-            border-color: none;
-            border: none;
-            background-color: #ffdeb3;
-            text-align: center;
-            width: 35px;
-            height: 35px;
-        }
+
         .polje {
             border: 7px solid  #4d2e00;
             border-color: #4d2e00;
@@ -60,6 +46,7 @@
             width: 60%;
             height: 60%;
         }
+
         h2 {
             color: #4d2e00;
             font-weight: bolder;
@@ -67,18 +54,14 @@
             padding-left: 100px;
             text-align: left;
         }
-        .poln_kvadratek {
-            border-color: none;
-            background-color: #ffc880;
-            width: 35px;
-            height: 35px;
-        }
+       
         .navodilo {
             font-size: 16px;
             color: #4d2e00;
             text-align: left;
             padding-left: 100px;
         }
+
         .gumb {
             background-color: #995900; 
             border: none;
@@ -89,17 +72,19 @@
             display: inline-block;
             font-size: 15px;    
         }
+
         tr {
             text-align: center;
         }
         td {
             text-align: center;
         }
-
         
         .opazovan_kvadratek {
             border-color: none;
-            background-color: green;
+            border: none;
+            background-color: #d3f8d3;
+            text-align: center;
             width: 35px;
             height: 35px;
 
@@ -107,11 +92,39 @@
 
         .napacen_kvadratek {
             border-color: none;
-            background-color: rgb(255, 0, 0);
+            border: none;
+            background-color: #ff4400;
+            text-align: center;
             width: 35px;
             height: 35px;
         }
 
+        .poln_kvadratek {
+            border-color: none;
+            border: none;
+            background-color: #ffc880;
+            text-align: center;
+            width: 35px;
+            height: 35px;
+        }
+
+        .prazen_gumb {
+            border-color: none;
+            border: none;
+            background-color: #ffffff;
+            text-align: center;
+            width: 35px;
+            height: 35px;
+        }
+
+        .izpolnjen_gumb{
+            border-color: none;
+            border: none;
+            background-color: #ffdeb3;
+            text-align: center;
+            width: 35px;
+            height: 35px;
+        }
     </style>
 
 <body style="text-align: center;">
@@ -814,20 +827,7 @@
                         <button class="gumb" style="padding-top: 7px" type="submit">počisti</button>
                     </form>  
                 </p>
-                </tr>
-
-                <tr>
-                Preverjaj zadnji vnos.
-                <p class="pojasnilo">Če vklopite funkcijo, bo stvar ... - napisano na majhno</p>
-                <form action='/igra/{{id_igre}}/' method="post">
-                    <label class="switch">
-                        <input type="checkbox">
-                        <span class="slider"></span>
-                      </label>
-                </form>
-                </tr>
-              
-
+            </tr>
             </table>
           </td> 
         </tr>

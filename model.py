@@ -31,10 +31,10 @@ class Igra:
         #vrne vse celice v istem stolpcu, vrstici ali kvadratku, ki imajo enako vrednost kot dana celica
         # self.napake = 
         if zadnji_vnos is None:
-        self.zadnji_vnos = ()
+            self.zadnji_vnos = ()
         else:
             self.zadnji_vnos = zadnji_vnos
-     
+
     def __repr__(self):
         '''Vrne obliko (rešitve, začetno polje, trenutno polje, vnešene možnosti).'''
         return  repr((self.resitve, self.zacetni, self.trenutni, self.napake, self.zadnji_vnos))
@@ -50,9 +50,7 @@ class Igra:
             return FIKSNO_POLJE
         else:
             self.trenutni[celica] = stevilo
-            self.zadnji_vnos = (celica, stevilo)
-        if self.zmaga:
-            return ZMAGA
+        self.zadnji_vnos = (celica, stevilo)
         return USPESEN_VNOS
     
 
@@ -138,9 +136,8 @@ class Igra:
         v = self.preveri_vrstico(celica)
         s = self.preveri_stolpec(celica)
         k = self.preveri_kvadratek(celica)
-        if v == NAROBE or s == NAROBE or k == NAROBE:
-            return self.napake[celica] 
-        return PRAVILNO
+        return self.napake[celica] 
+        
 
     def pocisti(self):
         '''Začne isto igro od začetka'''
@@ -185,6 +182,7 @@ class Sudoku:
         self.nalozi_igre_iz_datoteke()
         igra = self.igre[id_igre]
         igra.vnos(celica, stevilo)
+        igra.preveri_vnos(celica)
         self.igre[id_igre] = igra 
         self.zapisi_igre_v_datoteko()
         return igra.vnos(celica, stevilo)
@@ -198,7 +196,11 @@ class Sudoku:
         return igra.moznost(celica, stevilo)
     
     def preveri_vnos(self, id_igre, celica):
+        self.nalozi_igre_iz_datoteke()
         igra = self.igre[id_igre]
+        igra.preveri_vnos(celica)
+        self.igre[id_igre] = igra
+        self.zapisi_igre_v_datoteko()
         return igra.preveri_vnos(celica)
 
     def pocisti(self, id_igre):

@@ -162,8 +162,8 @@
                         % end
                     </table>
                 </td>
-                <td>
-                    <p>
+                <td style="font-size: large">
+                    <p style="font-size: large">
                         Kako želite nadaljevati?
                     </p>
                     <form action="/resitev_preusmeritev/{{id_igre}}/" method="post" >

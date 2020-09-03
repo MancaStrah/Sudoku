@@ -809,18 +809,13 @@
                         Ko se polje obarva, je vaš vnos zabeležen. <br>
                         Kasneje ga lahko spremenite.
                     </p>
-                </tr>
-                <tr>
-                    <br>
                     <br>
                     <p class="navodilo" style="padding-bottom: 7px">Preverite, ali ste sudoku rešili pravilno: <br><br>
                         <form action="/preveri_zmaga/{{id_igre}}/" method="post">
                             <button class="gumb" style="padding-top: 7px" type="submit">preveri</button>
                         </form>
                     </p>
-                    </tr>
-                
-                <tr>
+                   
                     <br>
                     <p class="navodilo" style="padding-bottom: 7px">Počistite polje in začnite od začetka: <br><br>
                      <form action="/pocisti_igro/{{id_igre}}/" method="post">

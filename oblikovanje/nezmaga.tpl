@@ -75,9 +75,9 @@
         <div class="obvestilo"> 
             Žal sudoku ni pravilno izpolnjen :( 
         </div>
-        <div >
+        <div style="font-size: large">
             <form action="/preveri_preusmeritev/{{id_igre}}/" method="post" >
-                <p>Kaj želite storiti?</p>
+                <p style="font-size: larger">Kaj želite storiti?</p>
                 <div class="center">
                     <input type="radio" id="2" name="vnos" value='2' required>
                     <label for="2">nadaljuj s to igro</label> 
@@ -86,7 +86,7 @@
                     <label for="1">nova igra</label>
 
                     <input  type="radio" id="3" name="vnos" value='3'>
-                    <label for="3">začni igro od začetka</label>
+                    <label for="3">začni isto igro od začetka</label>
 
                     <input type="radio" id="4" name="vnos" value='4'>
                     <label for="4">pokaži rešitev</label>

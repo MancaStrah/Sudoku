@@ -2,7 +2,7 @@
 Projektna naloga pri predmetu Uvod v programiranje.
 
 ## Uporaba
-Poženite 'spletni_vemsnik.py' in sledite povezavi, ki vas vodi do spletne strani. 
+Poženite 'spletni_vmesnik.py' in sledite povezavi, ki vas vodi do spletne strani. 
 
 ## Možnosti
 Izbirate lahko med tremi stopnjami težavnosti. Vključite lahko tudi pomoč -

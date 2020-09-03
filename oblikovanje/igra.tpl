@@ -43,8 +43,9 @@
             background-color:#4d2e00 ;
             border-width: 5px;
             border-inline-end-color:#4d2e00 ;
-            width: 60%;
-            height: 60%;
+            width: 90%;
+            height: 100%;
+            content-align: center;
         }
 
         h2 {
@@ -85,8 +86,8 @@
             border: none;
             background-color: #d3f8d3;
             text-align: center;
-            width: 35px;
-            height: 35px;
+            width: 59px;
+            height: 59px;
 
         }
 
@@ -95,8 +96,8 @@
             border: none;
             background-color: #ff4400;
             text-align: center;
-            width: 35px;
-            height: 35px;
+            width: 59px;
+            height: 59px;
         }
 
         .poln_kvadratek {
@@ -104,8 +105,8 @@
             border: none;
             background-color: #ffc880;
             text-align: center;
-            width: 35px;
-            height: 35px;
+            width: 59px;
+            height: 59px;
         }
 
         .prazen_gumb {
@@ -113,8 +114,8 @@
             border: none;
             background-color: #ffffff;
             text-align: center;
-            width: 35px;
-            height: 35px;
+            width: 59px;
+            height: 59px;
         }
 
         .izpolnjen_gumb{
@@ -122,8 +123,8 @@
             border: none;
             background-color: #ffdeb3;
             text-align: center;
-            width: 35px;
-            height: 35px;
+            width: 59px;
+            height: 59px;
         }
     </style>
 
@@ -810,18 +811,23 @@
                         Kasneje ga lahko spremenite.
                     </p>
                     <br>
-                    <p class="navodilo" style="padding-bottom: 7px">Preverite, ali ste sudoku rešili pravilno: <br><br>
+                    <div class="navodilo" style="padding-bottom: 2px; text-align: left">
+                        Preverite, ali ste sudoku rešili pravilno:
+                        <p style="font-size:smaller; font-style:italic; padding-bottom:10px; padding-top:2px; text-align: left">
+                            Tu najdete tudi rešitev in možnost igranja nove igre.
+                        </p>
                         <form action="/preveri_zmaga/{{id_igre}}/" method="post">
                             <button class="gumb" style="padding-top: 7px" type="submit">preveri</button>
                         </form>
-                    </p>
+                    
+                    </div>
                    
                     <br>
-                    <p class="navodilo" style="padding-bottom: 7px">Počistite polje in začnite od začetka: <br><br>
+                    <p class="navodilo" style="text-align: left"> Počistite polje in začnite od začetka: <br><br>
                      <form action="/pocisti_igro/{{id_igre}}/" method="post">
                         <button class="gumb" style="padding-top: 7px" type="submit">počisti</button>
                     </form>  
-                </p>
+                    </p>
             </tr>
             </table>
           </td> 

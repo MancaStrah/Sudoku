@@ -7,7 +7,6 @@ SKRIVNOST = 'zelva'
 DATOTETKA_S_STANJEM = 'Sudoku\stanje.json'
 DATOTOEKA_S_SUDOKUJI = 'Sudoku\sudoku_in_resitve.txt'
 
-
 sudoku = Sudoku(DATOTETKA_S_STANJEM, DATOTOEKA_S_SUDOKUJI)
 
 
@@ -45,7 +44,6 @@ def izberi(id_igre):
     bottle.response.set_cookie('stikalo_za_pomoc', stikalo_za_pomoc, secret=SKRIVNOST, path='/')
     bottle.redirect('/igra/' + str(id_igre) + '/')
     
-
 @bottle.get('/igra/<id_igre>/')
 def pokazi_igro(id_igre):
     id_igre = int((bottle.request.get_cookie('id_igre', secret=SKRIVNOST)))
@@ -61,7 +59,6 @@ def vnesi(id_igre):
     stikalo_za_pomoc = bottle.request.get_cookie('stikalo_za_pomoc', secret=SKRIVNOST)
     sudoku.vnesi(id_igre, celica, stevilo)
     bottle.redirect('/igra/' + str(id_igre) + '/')
-
 
 @bottle.post('/preveri_zmaga/<id_igre>/')
 def zmaga(id_igre):
@@ -111,48 +108,5 @@ def preusmeritev_resitev_igre(id_igre):
     elif vnos == 3: #uporabnik želi igrati isto igro od začetka
         igra.pocisti()
         bottle.redirect('/igra/' + str(id_igre) + '/')
-
-
-# @bottle.post('/preveri_vnos/<id_igre>/')
-# def preveri_vnos(id_igre):
-#     id_igre = int(bottle.request.get_cookie('id_igre', secret=SKRIVNOST))
-#     igra = sudoku.igre[id_igre]
-#     vnos = igra.zadnji_vnos()
-#     if vnos == PRAVILNO:
-#         bottle.redirect('/igra/' + str(id_igre) + '/')
-#     else:
-#         return bottle.template('Sudoku/resitev.tpl', igra=igra, id_igre=id_igre)
-
-
-
-
-    
-    
-
-
-
-
-
-# @bottle.post('/igra/')
-# def preveri_vnos():
-#     id_igre = (bottle.request.get_cookie('id_igre', secret=SKRIVNOST))
-#     celica = bottle.request.forms.get('(vrstica, stolpec)')
-#     stevilo = bottle.request.forms.getunicode('stevilo')
-#     sudoku.preveri_vnos(id_igre, celica)
-#     bottle.redirect('/igra/')
-
-
-# @bottle.post('/igra/')
-# def vnesi_moznost():
-#     id_igre = int(bottle.request.get_cookie('id_igre', secret=SKRIVNOST))
-#     celica = bottle.request.forms.get('(vrstica, stolpec)')
-#     stevilo = bottle.request.forms.getunicode('stevilo')
-#     sudoku.vnesi_moznost(id_igre, celica, stevilo)
-
-    # bottle.redirect('/igra/')
-
-
-
-
 
 bottle.run(reloader=True, debug=True)

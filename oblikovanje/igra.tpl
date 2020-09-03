@@ -11,7 +11,6 @@
             height: 100%;
             font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
         }
-
         body {
             background-color: #FFEFD5;
             margin: auto;
@@ -33,12 +32,10 @@
             -webkit-appearance: none;
             margin: 0;
         }
-
   
         table {
             border-inline-color: #4d2e00;
         }
-
         .prazen_gumb {
             border-color: none;
             border: none;
@@ -46,7 +43,6 @@
             width: 35px;
             height: 35px;
         }
-
         .izpolnjen_gumb{
             border-color: none;
             border: none;
@@ -55,7 +51,6 @@
             width: 35px;
             height: 35px;
         }
-
         .polje {
             border: 7px solid  #4d2e00;
             border-color: #4d2e00;
@@ -64,9 +59,7 @@
             border-inline-end-color:#4d2e00 ;
             width: 60%;
             height: 60%;
-
         }
-
         h2 {
             color: #4d2e00;
             font-weight: bolder;
@@ -74,21 +67,18 @@
             padding-left: 100px;
             text-align: left;
         }
-
         .poln_kvadratek {
             border-color: none;
             background-color: #ffc880;
             width: 35px;
             height: 35px;
         }
-
         .navodilo {
             font-size: 16px;
             color: #4d2e00;
             text-align: left;
             padding-left: 100px;
         }
-
         .gumb {
             background-color: #995900; 
             border: none;
@@ -99,14 +89,29 @@
             display: inline-block;
             font-size: 15px;    
         }
-
         tr {
             text-align: center;
         }
-
         td {
             text-align: center;
         }
+
+        
+        .opazovan_kvadratek {
+            border-color: none;
+            background-color: green;
+            width: 35px;
+            height: 35px;
+
+        }
+
+        .napacen_kvadratek {
+            border-color: none;
+            background-color: rgb(255, 0, 0);
+            width: 35px;
+            height: 35px;
+        }
+
     </style>
 
 <body style="text-align: center;">
@@ -119,18 +124,64 @@
                 <tr>
                     <td> 
                         <table>
-                            % for vrstica in range(1, 4):
+                            % for vrstica in range(1,4):
                             <tr>
                                 % for stolpec in range(1, 4):
                                     % if igra.zacetni[(vrstica, stolpec)] != 0:
-                                        <td class="poln_kvadratek"> {{igra.zacetni[(vrstica, stolpec)]}} </td>
+                                        % if stikalo_za_pomoc:
+                                            %if len(igra.zadnji_vnos) == 0:
+                                                <td class="poln_kvadratek"> {{igra.zacetni[(vrstica, stolpec)]}} </td>
+                                            %else:
+                                                %if (vrstica, stolpec) in igra.napake[(igra.zadnji_vnos[0])]:
+                                                    <td class="napacen_kvadratek"> {{igra.zacetni[(vrstica, stolpec)]}} </td>
+                                                %else:
+                                                <td class="poln_kvadratek"> {{igra.zacetni[(vrstica, stolpec)]}} </td>
+                                                %end
+                                            %end
+                                        %else:
+                                            <td class="poln_kvadratek"> {{igra.zacetni[(vrstica, stolpec)]}} </td>
+                                        %end
                                     % elif igra.trenutni [(vrstica, stolpec)] != 0 and igra.zacetni[(vrstica, stolpec)] == 0:
-                                        <td> 
-                                        <form action="/igra/{{id_igre}}/" method="post">
-                                        <input type="number" class="izpolnjen_gumb" id="stevilo" name="stevilo" appearance="none" value="{{igra.trenutni[(vrstica, stolpec)]}}" required>
-                                        <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
-                                        </form>
-                                        </td>
+                                        % if stikalo_za_pomoc:
+                                            %if len(igra.zadnji_vnos) == 0:
+                                                <td> 
+                                                    <form action="/igra/{{id_igre}}/" method="post">
+                                                    <input type="number" class="izpolnjen_gumb" id="stevilo" name="stevilo" appearance="none" value="{{igra.trenutni[(vrstica, stolpec)]}}" required>
+                                                    <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
+                                                    </form>
+                                                </td>
+                                            %else:
+                                                %if (vrstica, stolpec) == igra.zadnji_vnos[0]:
+                                                <td> 
+                                                    <form action="/igra/{{id_igre}}/" method="post">
+                                                    <input type="number" class="opazovan_kvadratek" id="stevilo" name="stevilo" appearance="none" value="{{igra.trenutni[(vrstica, stolpec)]}}" required>
+                                                    <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
+                                                    </form>
+                                                </td>
+                                                %elif (vrstica, stolpec) in igra.napake[(igra.zadnji_vnos[0])]:
+                                                    <td> 
+                                                        <form action="/igra/{{id_igre}}/" method="post">
+                                                        <input type="number" class="napacen_kvadratek" id="stevilo" name="stevilo" appearance="none" value="{{igra.trenutni[(vrstica, stolpec)]}}" required>
+                                                        <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
+                                                        </form>
+                                                    </td>
+                                                %else:
+                                                    <td> 
+                                                        <form action="/igra/{{id_igre}}/" method="post">
+                                                        <input type="number" class="izpolnjen_gumb" id="stevilo" name="stevilo" appearance="none" value="{{igra.trenutni[(vrstica, stolpec)]}}" required>
+                                                        <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
+                                                        </form>
+                                                    </td>
+                                                %end
+                                            %end
+                                        %else:
+                                            <td> 
+                                                <form action="/igra/{{id_igre}}/" method="post">
+                                                <input type="number" class="izpolnjen_gumb" id="stevilo" name="stevilo" appearance="none" value="{{igra.trenutni[(vrstica, stolpec)]}}" required>
+                                                <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
+                                                </form>
+                                            </td>
+                                        %end
                                     % else:
                                     <td> 
                                         <form action="/igra/{{id_igre}}/" method="post">
@@ -146,18 +197,64 @@
                     </td>
                     <td>
                         <table>
-                            % for vrstica in range(1, 4):
+                            % for vrstica in range(1,4):
                             <tr>
-                                % for stolpec in range(4, 7):
+                                % for stolpec in range(4,7):
                                     % if igra.zacetni[(vrstica, stolpec)] != 0:
-                                        <td class="poln_kvadratek"> {{igra.zacetni[(vrstica, stolpec)]}} </td>
+                                        % if stikalo_za_pomoc:
+                                            %if len(igra.zadnji_vnos) == 0:
+                                                <td class="poln_kvadratek"> {{igra.zacetni[(vrstica, stolpec)]}} </td>
+                                            %else:
+                                                %if (vrstica, stolpec) in igra.napake[(igra.zadnji_vnos[0])]:
+                                                    <td class="napacen_kvadratek"> {{igra.zacetni[(vrstica, stolpec)]}} </td>
+                                                %else:
+                                                <td class="poln_kvadratek"> {{igra.zacetni[(vrstica, stolpec)]}} </td>
+                                                %end
+                                            %end
+                                        %else:
+                                            <td class="poln_kvadratek"> {{igra.zacetni[(vrstica, stolpec)]}} </td>
+                                        %end
                                     % elif igra.trenutni [(vrstica, stolpec)] != 0 and igra.zacetni[(vrstica, stolpec)] == 0:
-                                        <td> 
-                                        <form action="/igra/{{id_igre}}/" method="post">
-                                        <input type="number" class="izpolnjen_gumb" id="stevilo" name="stevilo" appearance="none", value="{{igra.trenutni[(vrstica, stolpec)]}}" required>
-                                        <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
-                                        </form>
-                                        </td>
+                                        % if stikalo_za_pomoc:
+                                            %if len(igra.zadnji_vnos) == 0:
+                                                <td> 
+                                                    <form action="/igra/{{id_igre}}/" method="post">
+                                                    <input type="number" class="izpolnjen_gumb" id="stevilo" name="stevilo" appearance="none" value="{{igra.trenutni[(vrstica, stolpec)]}}" required>
+                                                    <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
+                                                    </form>
+                                                </td>
+                                            %else:
+                                                %if (vrstica, stolpec) == igra.zadnji_vnos[0]:
+                                                <td> 
+                                                    <form action="/igra/{{id_igre}}/" method="post">
+                                                    <input type="number" class="opazovan_kvadratek" id="stevilo" name="stevilo" appearance="none" value="{{igra.trenutni[(vrstica, stolpec)]}}" required>
+                                                    <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
+                                                    </form>
+                                                </td>
+                                                %elif (vrstica, stolpec) in igra.napake[(igra.zadnji_vnos[0])]:
+                                                    <td> 
+                                                        <form action="/igra/{{id_igre}}/" method="post">
+                                                        <input type="number" class="napacen_kvadratek" id="stevilo" name="stevilo" appearance="none" value="{{igra.trenutni[(vrstica, stolpec)]}}" required>
+                                                        <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
+                                                        </form>
+                                                    </td>
+                                                %else:
+                                                    <td> 
+                                                        <form action="/igra/{{id_igre}}/" method="post">
+                                                        <input type="number" class="izpolnjen_gumb" id="stevilo" name="stevilo" appearance="none" value="{{igra.trenutni[(vrstica, stolpec)]}}" required>
+                                                        <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
+                                                        </form>
+                                                    </td>
+                                                %end
+                                            %end
+                                        %else:
+                                            <td> 
+                                                <form action="/igra/{{id_igre}}/" method="post">
+                                                <input type="number" class="izpolnjen_gumb" id="stevilo" name="stevilo" appearance="none" value="{{igra.trenutni[(vrstica, stolpec)]}}" required>
+                                                <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
+                                                </form>
+                                            </td>
+                                        %end
                                     % else:
                                     <td> 
                                         <form action="/igra/{{id_igre}}/" method="post">
@@ -173,18 +270,64 @@
                     </td>
                     <td> 
                         <table>
-                            % for vrstica in range(1, 4):
+                            % for vrstica in range(1,4):
                             <tr>
-                                % for stolpec in range(7, 10):
+                                % for stolpec in range(7,10):
                                     % if igra.zacetni[(vrstica, stolpec)] != 0:
-                                        <td class="poln_kvadratek"> {{igra.zacetni[(vrstica, stolpec)]}} </td>
+                                        % if stikalo_za_pomoc:
+                                            %if len(igra.zadnji_vnos) == 0:
+                                                <td class="poln_kvadratek"> {{igra.zacetni[(vrstica, stolpec)]}} </td>
+                                            %else:
+                                                %if (vrstica, stolpec) in igra.napake[(igra.zadnji_vnos[0])]:
+                                                    <td class="napacen_kvadratek"> {{igra.zacetni[(vrstica, stolpec)]}} </td>
+                                                %else:
+                                                <td class="poln_kvadratek"> {{igra.zacetni[(vrstica, stolpec)]}} </td>
+                                                %end
+                                            %end
+                                        %else:
+                                            <td class="poln_kvadratek"> {{igra.zacetni[(vrstica, stolpec)]}} </td>
+                                        %end
                                     % elif igra.trenutni [(vrstica, stolpec)] != 0 and igra.zacetni[(vrstica, stolpec)] == 0:
-                                        <td> 
-                                        <form action="/igra/{{id_igre}}/" method="post">
-                                        <input type="number" class="izpolnjen_gumb" id="stevilo" name="stevilo" appearance="none", value="{{igra.trenutni[(vrstica, stolpec)]}}" required>
-                                        <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
-                                        </form>
-                                        </td>
+                                        % if stikalo_za_pomoc:
+                                            %if len(igra.zadnji_vnos) == 0:
+                                                <td> 
+                                                    <form action="/igra/{{id_igre}}/" method="post">
+                                                    <input type="number" class="izpolnjen_gumb" id="stevilo" name="stevilo" appearance="none" value="{{igra.trenutni[(vrstica, stolpec)]}}" required>
+                                                    <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
+                                                    </form>
+                                                </td>
+                                            %else:
+                                                %if (vrstica, stolpec) == igra.zadnji_vnos[0]:
+                                                <td> 
+                                                    <form action="/igra/{{id_igre}}/" method="post">
+                                                    <input type="number" class="opazovan_kvadratek" id="stevilo" name="stevilo" appearance="none" value="{{igra.trenutni[(vrstica, stolpec)]}}" required>
+                                                    <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
+                                                    </form>
+                                                </td>
+                                                %elif (vrstica, stolpec) in igra.napake[(igra.zadnji_vnos[0])]:
+                                                    <td> 
+                                                        <form action="/igra/{{id_igre}}/" method="post">
+                                                        <input type="number" class="napacen_kvadratek" id="stevilo" name="stevilo" appearance="none" value="{{igra.trenutni[(vrstica, stolpec)]}}" required>
+                                                        <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
+                                                        </form>
+                                                    </td>
+                                                %else:
+                                                    <td> 
+                                                        <form action="/igra/{{id_igre}}/" method="post">
+                                                        <input type="number" class="izpolnjen_gumb" id="stevilo" name="stevilo" appearance="none" value="{{igra.trenutni[(vrstica, stolpec)]}}" required>
+                                                        <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
+                                                        </form>
+                                                    </td>
+                                                %end
+                                            %end
+                                        %else:
+                                            <td> 
+                                                <form action="/igra/{{id_igre}}/" method="post">
+                                                <input type="number" class="izpolnjen_gumb" id="stevilo" name="stevilo" appearance="none" value="{{igra.trenutni[(vrstica, stolpec)]}}" required>
+                                                <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
+                                                </form>
+                                            </td>
+                                        %end
                                     % else:
                                     <td> 
                                         <form action="/igra/{{id_igre}}/" method="post">
@@ -202,18 +345,64 @@
                 <tr>
                     <td> 
                         <table>
-                            % for vrstica in range(4, 7):
+                            % for vrstica in range(4,7):
                             <tr>
-                                % for stolpec in range(1, 4):
+                                % for stolpec in range(1,4):
                                     % if igra.zacetni[(vrstica, stolpec)] != 0:
-                                        <td class="poln_kvadratek"> {{igra.zacetni[(vrstica, stolpec)]}} </td>
+                                        % if stikalo_za_pomoc:
+                                            %if len(igra.zadnji_vnos) == 0:
+                                                <td class="poln_kvadratek"> {{igra.zacetni[(vrstica, stolpec)]}} </td>
+                                            %else:
+                                                %if (vrstica, stolpec) in igra.napake[(igra.zadnji_vnos[0])]:
+                                                    <td class="napacen_kvadratek"> {{igra.zacetni[(vrstica, stolpec)]}} </td>
+                                                %else:
+                                                <td class="poln_kvadratek"> {{igra.zacetni[(vrstica, stolpec)]}} </td>
+                                                %end
+                                            %end
+                                        %else:
+                                            <td class="poln_kvadratek"> {{igra.zacetni[(vrstica, stolpec)]}} </td>
+                                        %end
                                     % elif igra.trenutni [(vrstica, stolpec)] != 0 and igra.zacetni[(vrstica, stolpec)] == 0:
-                                        <td> 
-                                        <form action="/igra/{{id_igre}}/" method="post">
-                                        <input type="number" class="izpolnjen_gumb" id="stevilo" name="stevilo" appearance="none", value="{{igra.trenutni[(vrstica, stolpec)]}}" required>
-                                        <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
-                                        </form>
-                                        </td>
+                                        % if stikalo_za_pomoc:
+                                            %if len(igra.zadnji_vnos) == 0:
+                                                <td> 
+                                                    <form action="/igra/{{id_igre}}/" method="post">
+                                                    <input type="number" class="izpolnjen_gumb" id="stevilo" name="stevilo" appearance="none" value="{{igra.trenutni[(vrstica, stolpec)]}}" required>
+                                                    <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
+                                                    </form>
+                                                </td>
+                                            %else:
+                                                %if (vrstica, stolpec) == igra.zadnji_vnos[0]:
+                                                <td> 
+                                                    <form action="/igra/{{id_igre}}/" method="post">
+                                                    <input type="number" class="opazovan_kvadratek" id="stevilo" name="stevilo" appearance="none" value="{{igra.trenutni[(vrstica, stolpec)]}}" required>
+                                                    <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
+                                                    </form>
+                                                </td>
+                                                %elif (vrstica, stolpec) in igra.napake[(igra.zadnji_vnos[0])]:
+                                                    <td> 
+                                                        <form action="/igra/{{id_igre}}/" method="post">
+                                                        <input type="number" class="napacen_kvadratek" id="stevilo" name="stevilo" appearance="none" value="{{igra.trenutni[(vrstica, stolpec)]}}" required>
+                                                        <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
+                                                        </form>
+                                                    </td>
+                                                %else:
+                                                    <td> 
+                                                        <form action="/igra/{{id_igre}}/" method="post">
+                                                        <input type="number" class="izpolnjen_gumb" id="stevilo" name="stevilo" appearance="none" value="{{igra.trenutni[(vrstica, stolpec)]}}" required>
+                                                        <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
+                                                        </form>
+                                                    </td>
+                                                %end
+                                            %end
+                                        %else:
+                                            <td> 
+                                                <form action="/igra/{{id_igre}}/" method="post">
+                                                <input type="number" class="izpolnjen_gumb" id="stevilo" name="stevilo" appearance="none" value="{{igra.trenutni[(vrstica, stolpec)]}}" required>
+                                                <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
+                                                </form>
+                                            </td>
+                                        %end
                                     % else:
                                     <td> 
                                         <form action="/igra/{{id_igre}}/" method="post">
@@ -229,18 +418,64 @@
                     </td>
                     <td> 
                         <table>
-                            % for vrstica in range(4, 7):
+                            % for vrstica in range(4,7):
                             <tr>
-                                % for stolpec in range(4, 7):
+                                % for stolpec in range(4,7):
                                     % if igra.zacetni[(vrstica, stolpec)] != 0:
-                                        <td class="poln_kvadratek"> {{igra.zacetni[(vrstica, stolpec)]}} </td>
+                                        % if stikalo_za_pomoc:
+                                            %if len(igra.zadnji_vnos) == 0:
+                                                <td class="poln_kvadratek"> {{igra.zacetni[(vrstica, stolpec)]}} </td>
+                                            %else:
+                                                %if (vrstica, stolpec) in igra.napake[(igra.zadnji_vnos[0])]:
+                                                    <td class="napacen_kvadratek"> {{igra.zacetni[(vrstica, stolpec)]}} </td>
+                                                %else:
+                                                <td class="poln_kvadratek"> {{igra.zacetni[(vrstica, stolpec)]}} </td>
+                                                %end
+                                            %end
+                                        %else:
+                                            <td class="poln_kvadratek"> {{igra.zacetni[(vrstica, stolpec)]}} </td>
+                                        %end
                                     % elif igra.trenutni [(vrstica, stolpec)] != 0 and igra.zacetni[(vrstica, stolpec)] == 0:
-                                        <td> 
-                                        <form action="/igra/{{id_igre}}/" method="post">
-                                        <input type="number" class="izpolnjen_gumb" id="stevilo" name="stevilo" appearance="none", value="{{igra.trenutni[(vrstica, stolpec)]}}" required>
-                                        <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
-                                        </form>
-                                        </td>
+                                        % if stikalo_za_pomoc:
+                                            %if len(igra.zadnji_vnos) == 0:
+                                                <td> 
+                                                    <form action="/igra/{{id_igre}}/" method="post">
+                                                    <input type="number" class="izpolnjen_gumb" id="stevilo" name="stevilo" appearance="none" value="{{igra.trenutni[(vrstica, stolpec)]}}" required>
+                                                    <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
+                                                    </form>
+                                                </td>
+                                            %else:
+                                                %if (vrstica, stolpec) == igra.zadnji_vnos[0]:
+                                                <td> 
+                                                    <form action="/igra/{{id_igre}}/" method="post">
+                                                    <input type="number" class="opazovan_kvadratek" id="stevilo" name="stevilo" appearance="none" value="{{igra.trenutni[(vrstica, stolpec)]}}" required>
+                                                    <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
+                                                    </form>
+                                                </td>
+                                                %elif (vrstica, stolpec) in igra.napake[(igra.zadnji_vnos[0])]:
+                                                    <td> 
+                                                        <form action="/igra/{{id_igre}}/" method="post">
+                                                        <input type="number" class="napacen_kvadratek" id="stevilo" name="stevilo" appearance="none" value="{{igra.trenutni[(vrstica, stolpec)]}}" required>
+                                                        <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
+                                                        </form>
+                                                    </td>
+                                                %else:
+                                                    <td> 
+                                                        <form action="/igra/{{id_igre}}/" method="post">
+                                                        <input type="number" class="izpolnjen_gumb" id="stevilo" name="stevilo" appearance="none" value="{{igra.trenutni[(vrstica, stolpec)]}}" required>
+                                                        <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
+                                                        </form>
+                                                    </td>
+                                                %end
+                                            %end
+                                        %else:
+                                            <td> 
+                                                <form action="/igra/{{id_igre}}/" method="post">
+                                                <input type="number" class="izpolnjen_gumb" id="stevilo" name="stevilo" appearance="none" value="{{igra.trenutni[(vrstica, stolpec)]}}" required>
+                                                <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
+                                                </form>
+                                            </td>
+                                        %end
                                     % else:
                                     <td> 
                                         <form action="/igra/{{id_igre}}/" method="post">
@@ -256,18 +491,64 @@
                     </td>
                     <td> 
                         <table>
-                            % for vrstica in range(4, 7):
+                            % for vrstica in range(4,7):
                             <tr>
-                                % for stolpec in range(7, 10):
+                                % for stolpec in range(7,10):
                                     % if igra.zacetni[(vrstica, stolpec)] != 0:
-                                        <td class="poln_kvadratek"> {{igra.zacetni[(vrstica, stolpec)]}} </td>
+                                        % if stikalo_za_pomoc:
+                                            %if len(igra.zadnji_vnos) == 0:
+                                                <td class="poln_kvadratek"> {{igra.zacetni[(vrstica, stolpec)]}} </td>
+                                            %else:
+                                                %if (vrstica, stolpec) in igra.napake[(igra.zadnji_vnos[0])]:
+                                                    <td class="napacen_kvadratek"> {{igra.zacetni[(vrstica, stolpec)]}} </td>
+                                                %else:
+                                                <td class="poln_kvadratek"> {{igra.zacetni[(vrstica, stolpec)]}} </td>
+                                                %end
+                                            %end
+                                        %else:
+                                            <td class="poln_kvadratek"> {{igra.zacetni[(vrstica, stolpec)]}} </td>
+                                        %end
                                     % elif igra.trenutni [(vrstica, stolpec)] != 0 and igra.zacetni[(vrstica, stolpec)] == 0:
-                                        <td> 
-                                        <form action="/igra/{{id_igre}}/" method="post">
-                                        <input type="number" class="izpolnjen_gumb" id="stevilo" name="stevilo" appearance="none", value="{{igra.trenutni[(vrstica, stolpec)]}}" required>
-                                        <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
-                                        </form>
-                                        </td>
+                                        % if stikalo_za_pomoc:
+                                            %if len(igra.zadnji_vnos) == 0:
+                                                <td> 
+                                                    <form action="/igra/{{id_igre}}/" method="post">
+                                                    <input type="number" class="izpolnjen_gumb" id="stevilo" name="stevilo" appearance="none" value="{{igra.trenutni[(vrstica, stolpec)]}}" required>
+                                                    <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
+                                                    </form>
+                                                </td>
+                                            %else:
+                                                %if (vrstica, stolpec) == igra.zadnji_vnos[0]:
+                                                <td> 
+                                                    <form action="/igra/{{id_igre}}/" method="post">
+                                                    <input type="number" class="opazovan_kvadratek" id="stevilo" name="stevilo" appearance="none" value="{{igra.trenutni[(vrstica, stolpec)]}}" required>
+                                                    <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
+                                                    </form>
+                                                </td>
+                                                %elif (vrstica, stolpec) in igra.napake[(igra.zadnji_vnos[0])]:
+                                                    <td> 
+                                                        <form action="/igra/{{id_igre}}/" method="post">
+                                                        <input type="number" class="napacen_kvadratek" id="stevilo" name="stevilo" appearance="none" value="{{igra.trenutni[(vrstica, stolpec)]}}" required>
+                                                        <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
+                                                        </form>
+                                                    </td>
+                                                %else:
+                                                    <td> 
+                                                        <form action="/igra/{{id_igre}}/" method="post">
+                                                        <input type="number" class="izpolnjen_gumb" id="stevilo" name="stevilo" appearance="none" value="{{igra.trenutni[(vrstica, stolpec)]}}" required>
+                                                        <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
+                                                        </form>
+                                                    </td>
+                                                %end
+                                            %end
+                                        %else:
+                                            <td> 
+                                                <form action="/igra/{{id_igre}}/" method="post">
+                                                <input type="number" class="izpolnjen_gumb" id="stevilo" name="stevilo" appearance="none" value="{{igra.trenutni[(vrstica, stolpec)]}}" required>
+                                                <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
+                                                </form>
+                                            </td>
+                                        %end
                                     % else:
                                     <td> 
                                         <form action="/igra/{{id_igre}}/" method="post">
@@ -285,18 +566,64 @@
                 <tr>
                     <td> 
                         <table>
-                            % for vrstica in range(7, 10):
+                            % for vrstica in range(7,10):
                             <tr>
                                 % for stolpec in range(1, 4):
                                     % if igra.zacetni[(vrstica, stolpec)] != 0:
-                                        <td class="poln_kvadratek"> {{igra.zacetni[(vrstica, stolpec)]}} </td>
+                                        % if stikalo_za_pomoc:
+                                            %if len(igra.zadnji_vnos) == 0:
+                                                <td class="poln_kvadratek"> {{igra.zacetni[(vrstica, stolpec)]}} </td>
+                                            %else:
+                                                %if (vrstica, stolpec) in igra.napake[(igra.zadnji_vnos[0])]:
+                                                    <td class="napacen_kvadratek"> {{igra.zacetni[(vrstica, stolpec)]}} </td>
+                                                %else:
+                                                <td class="poln_kvadratek"> {{igra.zacetni[(vrstica, stolpec)]}} </td>
+                                                %end
+                                            %end
+                                        %else:
+                                            <td class="poln_kvadratek"> {{igra.zacetni[(vrstica, stolpec)]}} </td>
+                                        %end
                                     % elif igra.trenutni [(vrstica, stolpec)] != 0 and igra.zacetni[(vrstica, stolpec)] == 0:
-                                        <td> 
-                                        <form action="/igra/{{id_igre}}/" method="post">
-                                        <input type="number" class="izpolnjen_gumb" id="stevilo" name="stevilo" appearance="none", value="{{igra.trenutni[(vrstica, stolpec)]}}" required>
-                                        <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
-                                        </form>
-                                        </td>
+                                        % if stikalo_za_pomoc:
+                                            %if len(igra.zadnji_vnos) == 0:
+                                                <td> 
+                                                    <form action="/igra/{{id_igre}}/" method="post">
+                                                    <input type="number" class="izpolnjen_gumb" id="stevilo" name="stevilo" appearance="none" value="{{igra.trenutni[(vrstica, stolpec)]}}" required>
+                                                    <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
+                                                    </form>
+                                                </td>
+                                            %else:
+                                                %if (vrstica, stolpec) == igra.zadnji_vnos[0]:
+                                                <td> 
+                                                    <form action="/igra/{{id_igre}}/" method="post">
+                                                    <input type="number" class="opazovan_kvadratek" id="stevilo" name="stevilo" appearance="none" value="{{igra.trenutni[(vrstica, stolpec)]}}" required>
+                                                    <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
+                                                    </form>
+                                                </td>
+                                                %elif (vrstica, stolpec) in igra.napake[(igra.zadnji_vnos[0])]:
+                                                    <td> 
+                                                        <form action="/igra/{{id_igre}}/" method="post">
+                                                        <input type="number" class="napacen_kvadratek" id="stevilo" name="stevilo" appearance="none" value="{{igra.trenutni[(vrstica, stolpec)]}}" required>
+                                                        <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
+                                                        </form>
+                                                    </td>
+                                                %else:
+                                                    <td> 
+                                                        <form action="/igra/{{id_igre}}/" method="post">
+                                                        <input type="number" class="izpolnjen_gumb" id="stevilo" name="stevilo" appearance="none" value="{{igra.trenutni[(vrstica, stolpec)]}}" required>
+                                                        <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
+                                                        </form>
+                                                    </td>
+                                                %end
+                                            %end
+                                        %else:
+                                            <td> 
+                                                <form action="/igra/{{id_igre}}/" method="post">
+                                                <input type="number" class="izpolnjen_gumb" id="stevilo" name="stevilo" appearance="none" value="{{igra.trenutni[(vrstica, stolpec)]}}" required>
+                                                <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
+                                                </form>
+                                            </td>
+                                        %end
                                     % else:
                                     <td> 
                                         <form action="/igra/{{id_igre}}/" method="post">
@@ -312,18 +639,64 @@
                     </td>
                     <td> 
                         <table>
-                            % for vrstica in range(7, 10):
+                            % for vrstica in range(7,10):
                             <tr>
-                                % for stolpec in range(4, 7):
+                                % for stolpec in range(4,7):
                                     % if igra.zacetni[(vrstica, stolpec)] != 0:
-                                        <td class="poln_kvadratek"> {{igra.zacetni[(vrstica, stolpec)]}} </td>
+                                        % if stikalo_za_pomoc:
+                                            %if len(igra.zadnji_vnos) == 0:
+                                                <td class="poln_kvadratek"> {{igra.zacetni[(vrstica, stolpec)]}} </td>
+                                            %else:
+                                                %if (vrstica, stolpec) in igra.napake[(igra.zadnji_vnos[0])]:
+                                                    <td class="napacen_kvadratek"> {{igra.zacetni[(vrstica, stolpec)]}} </td>
+                                                %else:
+                                                <td class="poln_kvadratek"> {{igra.zacetni[(vrstica, stolpec)]}} </td>
+                                                %end
+                                            %end
+                                        %else:
+                                            <td class="poln_kvadratek"> {{igra.zacetni[(vrstica, stolpec)]}} </td>
+                                        %end
                                     % elif igra.trenutni [(vrstica, stolpec)] != 0 and igra.zacetni[(vrstica, stolpec)] == 0:
-                                        <td> 
-                                        <form action="/igra/{{id_igre}}/" method="post">
-                                        <input type="number" class="izpolnjen_gumb" id="stevilo" name="stevilo" appearance="none", value="{{igra.trenutni[(vrstica, stolpec)]}}" required>
-                                        <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
-                                        </form>
-                                        </td>
+                                        % if stikalo_za_pomoc:
+                                            %if len(igra.zadnji_vnos) == 0:
+                                                <td> 
+                                                    <form action="/igra/{{id_igre}}/" method="post">
+                                                    <input type="number" class="izpolnjen_gumb" id="stevilo" name="stevilo" appearance="none" value="{{igra.trenutni[(vrstica, stolpec)]}}" required>
+                                                    <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
+                                                    </form>
+                                                </td>
+                                            %else:
+                                                %if (vrstica, stolpec) == igra.zadnji_vnos[0]:
+                                                <td> 
+                                                    <form action="/igra/{{id_igre}}/" method="post">
+                                                    <input type="number" class="opazovan_kvadratek" id="stevilo" name="stevilo" appearance="none" value="{{igra.trenutni[(vrstica, stolpec)]}}" required>
+                                                    <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
+                                                    </form>
+                                                </td>
+                                                %elif (vrstica, stolpec) in igra.napake[(igra.zadnji_vnos[0])]:
+                                                    <td> 
+                                                        <form action="/igra/{{id_igre}}/" method="post">
+                                                        <input type="number" class="napacen_kvadratek" id="stevilo" name="stevilo" appearance="none" value="{{igra.trenutni[(vrstica, stolpec)]}}" required>
+                                                        <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
+                                                        </form>
+                                                    </td>
+                                                %else:
+                                                    <td> 
+                                                        <form action="/igra/{{id_igre}}/" method="post">
+                                                        <input type="number" class="izpolnjen_gumb" id="stevilo" name="stevilo" appearance="none" value="{{igra.trenutni[(vrstica, stolpec)]}}" required>
+                                                        <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
+                                                        </form>
+                                                    </td>
+                                                %end
+                                            %end
+                                        %else:
+                                            <td> 
+                                                <form action="/igra/{{id_igre}}/" method="post">
+                                                <input type="number" class="izpolnjen_gumb" id="stevilo" name="stevilo" appearance="none" value="{{igra.trenutni[(vrstica, stolpec)]}}" required>
+                                                <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
+                                                </form>
+                                            </td>
+                                        %end
                                     % else:
                                     <td> 
                                         <form action="/igra/{{id_igre}}/" method="post">
@@ -339,18 +712,64 @@
                     </td>
                     <td> 
                         <table>
-                            % for vrstica in range(7, 10):
+                            % for vrstica in range(7,10):
                             <tr>
-                                % for stolpec in range(7, 10):
+                                % for stolpec in range(7,10):
                                     % if igra.zacetni[(vrstica, stolpec)] != 0:
-                                        <td class="poln_kvadratek"> {{igra.zacetni[(vrstica, stolpec)]}} </td>
+                                        % if stikalo_za_pomoc:
+                                            %if len(igra.zadnji_vnos) == 0:
+                                                <td class="poln_kvadratek"> {{igra.zacetni[(vrstica, stolpec)]}} </td>
+                                            %else:
+                                                %if (vrstica, stolpec) in igra.napake[(igra.zadnji_vnos[0])]:
+                                                    <td class="napacen_kvadratek"> {{igra.zacetni[(vrstica, stolpec)]}} </td>
+                                                %else:
+                                                <td class="poln_kvadratek"> {{igra.zacetni[(vrstica, stolpec)]}} </td>
+                                                %end
+                                            %end
+                                        %else:
+                                            <td class="poln_kvadratek"> {{igra.zacetni[(vrstica, stolpec)]}} </td>
+                                        %end
                                     % elif igra.trenutni [(vrstica, stolpec)] != 0 and igra.zacetni[(vrstica, stolpec)] == 0:
-                                        <td> 
-                                        <form action="/igra/{{id_igre}}/" method="post">
-                                        <input type="number" class="izpolnjen_gumb" id="stevilo" name="stevilo" appearance="none", value="{{igra.trenutni[(vrstica, stolpec)]}}" required>
-                                        <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
-                                        </form>
-                                        </td>
+                                        % if stikalo_za_pomoc:
+                                            %if len(igra.zadnji_vnos) == 0:
+                                                <td> 
+                                                    <form action="/igra/{{id_igre}}/" method="post">
+                                                    <input type="number" class="izpolnjen_gumb" id="stevilo" name="stevilo" appearance="none" value="{{igra.trenutni[(vrstica, stolpec)]}}" required>
+                                                    <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
+                                                    </form>
+                                                </td>
+                                            %else:
+                                                %if (vrstica, stolpec) == igra.zadnji_vnos[0]:
+                                                <td> 
+                                                    <form action="/igra/{{id_igre}}/" method="post">
+                                                    <input type="number" class="opazovan_kvadratek" id="stevilo" name="stevilo" appearance="none" value="{{igra.trenutni[(vrstica, stolpec)]}}" required>
+                                                    <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
+                                                    </form>
+                                                </td>
+                                                %elif (vrstica, stolpec) in igra.napake[(igra.zadnji_vnos[0])]:
+                                                    <td> 
+                                                        <form action="/igra/{{id_igre}}/" method="post">
+                                                        <input type="number" class="napacen_kvadratek" id="stevilo" name="stevilo" appearance="none" value="{{igra.trenutni[(vrstica, stolpec)]}}" required>
+                                                        <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
+                                                        </form>
+                                                    </td>
+                                                %else:
+                                                    <td> 
+                                                        <form action="/igra/{{id_igre}}/" method="post">
+                                                        <input type="number" class="izpolnjen_gumb" id="stevilo" name="stevilo" appearance="none" value="{{igra.trenutni[(vrstica, stolpec)]}}" required>
+                                                        <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
+                                                        </form>
+                                                    </td>
+                                                %end
+                                            %end
+                                        %else:
+                                            <td> 
+                                                <form action="/igra/{{id_igre}}/" method="post">
+                                                <input type="number" class="izpolnjen_gumb" id="stevilo" name="stevilo" appearance="none" value="{{igra.trenutni[(vrstica, stolpec)]}}" required>
+                                                <input type="hidden" id="celica" name="celica" value="({{vrstica}}, {{stolpec}})">
+                                                </form>
+                                            </td>
+                                        %end
                                     % else:
                                     <td> 
                                         <form action="/igra/{{id_igre}}/" method="post">

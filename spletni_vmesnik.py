@@ -13,7 +13,7 @@ sudoku = Sudoku(DATOTETKA_S_STANJEM, DATOTOEKA_S_SUDOKUJI)
 
 @bottle.get('/')
 def index():
-    return bottle.template('Sudoku\index.tpl')
+    return bottle.template('Sudoku/oblikovanje/index.tpl')
 
 @bottle.post('/')
 def nov_uporabnik():   
@@ -21,7 +21,7 @@ def nov_uporabnik():
 
 @bottle.get('/domaca_stran/')
 def domaca_stran():
-    return bottle.template('Sudoku/domaca_stran.tpl')
+    return bottle.template('Sudoku/oblikovanje/domaca_stran.tpl')
 
 @bottle.post('/nova_igra/')
 def nova_igra():
@@ -34,7 +34,7 @@ def nova_igra():
 def pokazi_igro(id_igre):
     id_igre = int((bottle.request.get_cookie('id_igre', secret=SKRIVNOST)))
     igra = sudoku.igre[id_igre]
-    return bottle.template('Sudoku/igra.tpl', igra=igra, id_igre=id_igre)
+    return bottle.template('Sudoku/oblikovanje/igra.tpl', igra=igra, id_igre=id_igre, sudoku=sudoku, stikalo_za_pomoc=stikalo_za_pomoc)
 
 @bottle.post('/igra/<id_igre>/')
 def vnesi(id_igre):
@@ -52,8 +52,7 @@ def zmaga(id_igre):
     id_igre = int(bottle.request.get_cookie('id_igre', secret=SKRIVNOST))
     igra = sudoku.igre[id_igre]
     if igra.zmaga():
-        return bottle.template('Sudoku/zmaga.tpl', igra=igra, id_igre=id_igre)
-    return bottle.template('Sudoku/nezmaga.tpl', igra=igra, id_igre=id_igre)
+    return bottle.template('Sudoku/oblikovanje/nezmaga.tpl', igra=igra, id_igre=id_igre)
 
 @bottle.post('/pocisti_igro/<id_igre>/')
 def pocisti(id_igre):
@@ -81,7 +80,7 @@ def preusmeritev(id_igre):
 def resitev_igre(id_igre):
     id_igre = int(bottle.request.get_cookie('id_igre', secret=SKRIVNOST))
     igra = sudoku.igre[id_igre]
-    return bottle.template('Sudoku/resitev.tpl', igra=igra, id_igre=id_igre)
+    return bottle.template('Sudoku/oblikovanje/resitev.tpl', igra=igra, id_igre=id_igre)
 
 @bottle.post('/resitev_preusmeritev/<id_igre>/')
 def preusmeritev_resitev_igre(id_igre):

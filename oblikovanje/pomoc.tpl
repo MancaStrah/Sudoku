@@ -69,12 +69,12 @@
 
         <p style="font-size: 30px; padding-top: 120px; padding-bottom: 50px">Želite med igro pomoč?</p>
    
-        <p style="font-size: 22px"> Če želite, da računalnik ob vsakem vnosu preveri, ali <br>
-            je vnost glede na trenutno polje pravilen, izberite 'da'. 
+        <p style="font-size: 22px"> Če želite, da računalnik ob vsakem vnosu preveri, <br>
+            ali je vnost glede na trenutno polje pravilen, izberite 'da'. 
         </p>
                
-        <p style="font-size: 19px;">Polje, v katero boste vnesli število, se bo obarvalo <br>
-            zeleno, polja v isti vrstici, stolpcu ali večjem kvadratku, <br>
+        <p style="font-size: 19px;">Polje, v katero boste vnesli število, se bo obarvalo zeleno, <br>
+            polja v isti vrstici, stolpcu ali večjem kvadratku, <br>
             kjer se vnešeno število ponovi, pa rdeče. 
         </p>
         <p style="font-style: italic ">

@@ -40,7 +40,7 @@ class Igra:
     def vnos(self, celica, stevilo):
         '''Preveri, ali je znak veljaven, in ga vnese v celico,
         če ta ni fiksna.'''
-        if stevilo not in (1,2,3,4,5,6,7,8,9):
+        if stevilo not in (1,2,3,4,5,6,7,8,9,):
             return NAPACEN_ZNAK
         if self.zacetni[celica] != 0:
             return FIKSNO_POLJE
@@ -126,6 +126,7 @@ class Igra:
     def pocisti(self):
         '''Začne isto igro od začetka'''
         slovar = self.zacetni
+        self.zadnji_vnos = ()
         self.trenutni = slovar
 
 

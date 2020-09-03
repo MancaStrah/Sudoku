@@ -72,6 +72,7 @@ def zmaga(id_igre):
 def pocisti(id_igre):
     id_igre = int(bottle.request.get_cookie('id_igre', secret=SKRIVNOST))
     igra = sudoku.igre[id_igre]
+    igra.zadnji_vnos = ()
     sudoku.pocisti(id_igre)
     bottle.redirect('/igra/' + str(id_igre) + '/')
 

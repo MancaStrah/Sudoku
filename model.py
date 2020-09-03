@@ -15,7 +15,7 @@ ZMAGA = 'W'
     
 class Igra:
      
-    def __init__(self, seznam, trenutni=None, moznosti=None): #Seznam je oblike (začetni sudoku, rešitev)
+    def __init__(self, seznam, trenutni=None, napake=None, zadnji_vnos=None): #Seznam je oblike (začetni sudoku, rešitev)
         self.resitve = seznam[1]
         self.zacetni = seznam[0]
         if trenutni is None:
@@ -24,18 +24,20 @@ class Igra:
             self.trenutni = trenutni
         #Slovar, v katerega bodo vnešene vrednosti, za katere igralec meni, da bi se 
         #lahko pojavile v določeni celici.
-        if moznosti is None:
-            self.moznosti = {(i,j): set() for i in range(1, 10) for j in range(1, 10)}
+        if napake is None:
+            self.napake = {(i,j): set() for i in range(1, 10) for j in range(1, 10)}
         else: 
-            self.moznosti = moznosti
+            self.napake = napake
         #vrne vse celice v istem stolpcu, vrstici ali kvadratku, ki imajo enako vrednost kot dana celica
-        self.napake = {(i,j): set() for i in range(1, 10) for j in range(1, 10)}
+        # self.napake = 
+        if zadnji_vnos is None:
         self.zadnji_vnos = ()
+        else:
+            self.zadnji_vnos = zadnji_vnos
      
-
     def __repr__(self):
         '''Vrne obliko (rešitve, začetno polje, trenutno polje, vnešene možnosti).'''
-        return  repr((self.resitve, self.zacetni, self.trenutni, self.moznosti))
+        return  repr((self.resitve, self.zacetni, self.trenutni, self.napake, self.zadnji_vnos))
         
     def zmaga(self):
         '''Preveri, ali je sudoku izpolnjen pravilno. '''
@@ -210,7 +212,7 @@ class Sudoku:
         
     def zapisi_igre_v_datoteko(self):
         with open(self.datoteka_s_stanjem, 'w', encoding='utf-8') as f:
-            seznam = {id_igre: (igra.resitve, igra.zacetni, igra.trenutni, igra.moznosti)
+            seznam = {id_igre: (igra.resitve, igra.zacetni, igra.trenutni, igra.napake, igra.zadnji_vnos)
                      for id_igre, igra in self.igre.items()} #hm
             print(self.igre.items())
             json.dump(str(seznam), f)
@@ -218,5 +220,5 @@ class Sudoku:
     def nalozi_igre_iz_datoteke(self):
         with open(self.datoteka_s_stanjem, 'r', encoding="utf-8") as f:
             igre = json.load(f)
-            self.igre = {int(id_igre): Igra((zacetni, resitev), trenutni, moznost)
-                         for id_igre, (resitev, zacetni, trenutni, moznost) in eval(igre).items()}
+            self.igre = {int(id_igre): Igra((zacetni, resitev), trenutni, napake, zadnji_vnos)
+                         for id_igre, (resitev, zacetni, trenutni, napake, zadnji_vnos) in eval(igre).items()}

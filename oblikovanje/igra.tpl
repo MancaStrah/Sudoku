@@ -45,7 +45,6 @@
             border-inline-end-color:#4d2e00 ;
             width: 90%;
             height: 100%;
-            content-align: center;
         }
 
         h2 {

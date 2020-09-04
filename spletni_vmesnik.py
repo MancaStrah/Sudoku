@@ -4,8 +4,8 @@ from model import *
 
 COOKIE = 'piskotek'
 SKRIVNOST = 'zelva'
-DATOTETKA_S_STANJEM = 'Sudoku\stanje.json'
-DATOTOEKA_S_SUDOKUJI = 'Sudoku\sudoku_in_resitve.txt'
+DATOTETKA_S_STANJEM = 'Sudoku/stanje.json'
+DATOTOEKA_S_SUDOKUJI = 'Sudoku/sudoku_in_resitve.txt'
 
 sudoku = Sudoku(DATOTETKA_S_STANJEM, DATOTOEKA_S_SUDOKUJI)
 

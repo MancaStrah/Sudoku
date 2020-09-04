@@ -809,10 +809,12 @@
             <table>
                 <tr>
                     <h2>NAVODILA</h2>
-                    <p class="navodilo">Za vnos števila v polje na levi izberite polje, <br> 
+                    <p class="navodilo" style="font-weight: bold;">Za vnos števila v polje na levi izberite polje, <br> 
                         vanj vnesite izbrano število in pritisnite enter. <br><br>
                         Ko se polje obarva, je vaš vnos zabeležen. <br>
-                        Kasneje ga lahko spremenite.
+                        Kasneje ga lahko spremenite. <br><br>
+                        Če želite vnešeno število izbrisati, morate v polje <br>
+                        vnesti število 0. <br><br>
                     </p>
                     <br>
                     <div class="navodilo" style="padding-bottom: 2px; text-align: left">

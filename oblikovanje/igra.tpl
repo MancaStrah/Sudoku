@@ -84,7 +84,7 @@
         .opazovan_kvadratek {
             border-color: none;
             border: none;
-            background-color: #d3f8d3;
+            background-color: #ffed4d;
             text-align: center;
             width: 59px;
             height: 59px;

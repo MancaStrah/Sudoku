@@ -2,7 +2,6 @@ import bottle
 from ast import literal_eval as make_tuple
 from model import *
 
-COOKIE = 'piskotek'
 SKRIVNOST = 'zelva'
 DATOTETKA_S_STANJEM = 'Sudoku/stanje.json'
 DATOTOEKA_S_SUDOKUJI = 'Sudoku/sudoku_in_resitve.txt'

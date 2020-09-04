@@ -3,14 +3,14 @@ from ast import literal_eval as make_tuple
 from model import *
 
 SKRIVNOST = 'zelva'
-DATOTETKA_S_STANJEM = 'Sudoku/stanje.json'
-DATOTOEKA_S_SUDOKUJI = 'Sudoku/sudoku_in_resitve.txt'
+DATOTETKA_S_STANJEM = 'stanje.json'
+DATOTOEKA_S_SUDOKUJI = 'sudoku_in_resitve.txt'
 
 sudoku = Sudoku(DATOTETKA_S_STANJEM, DATOTOEKA_S_SUDOKUJI)
 
 @bottle.get('/')
 def index():
-    return bottle.template('Sudoku/views/index.tpl')
+    return bottle.template('index.tpl')
 
 @bottle.post('/')
 def nov_uporabnik():   
@@ -18,7 +18,7 @@ def nov_uporabnik():
 
 @bottle.get('/domaca_stran/')
 def domaca_stran():
-    return bottle.template('Sudoku/views/domaca_stran.tpl')
+    return bottle.template('domaca_stran.tpl')
 
 @bottle.post('/nova_igra/')
 def nova_igra():
@@ -31,7 +31,7 @@ def nova_igra():
 def pomoc(id_igre):
     id_igre = int((bottle.request.get_cookie('id_igre', secret=SKRIVNOST)))
     igra = sudoku.igre[id_igre]
-    return bottle.template('Sudoku/views/pomoc.tpl', igra=igra, sudoku=sudoku, id_igre=id_igre)
+    return bottle.template('pomoc.tpl', igra=igra, sudoku=sudoku, id_igre=id_igre)
 
 @bottle.post('/pomoc/<id_igre>/')
 def izberi(id_igre):
@@ -47,7 +47,7 @@ def pokazi_igro(id_igre):
     id_igre = int((bottle.request.get_cookie('id_igre', secret=SKRIVNOST)))
     igra = sudoku.igre[id_igre]
     stikalo_za_pomoc = bottle.request.get_cookie('stikalo_za_pomoc', secret=SKRIVNOST)
-    return bottle.template('Sudoku/views/igra.tpl', igra=igra, id_igre=id_igre, sudoku=sudoku, stikalo_za_pomoc=stikalo_za_pomoc)
+    return bottle.template('igra.tpl', igra=igra, id_igre=id_igre, sudoku=sudoku, stikalo_za_pomoc=stikalo_za_pomoc)
 
 @bottle.post('/igra/<id_igre>/')
 def vnesi(id_igre):
@@ -63,8 +63,8 @@ def zmaga(id_igre):
     id_igre = int(bottle.request.get_cookie('id_igre', secret=SKRIVNOST))
     igra = sudoku.igre[id_igre]
     if igra.zmaga():
-        return bottle.template('Sudoku/views/zmaga.tpl', igra=igra, id_igre=id_igre)
-    return bottle.template('Sudoku/views/nezmaga.tpl', igra=igra, id_igre=id_igre)
+        return bottle.template('zmaga.tpl', igra=igra, id_igre=id_igre)
+    return bottle.template('nezmaga.tpl', igra=igra, id_igre=id_igre)
 
 @bottle.post('/pocisti_igro/<id_igre>/')
 def pocisti(id_igre):
@@ -93,7 +93,7 @@ def preusmeritev(id_igre):
 def resitev_igre(id_igre):
     id_igre = int(bottle.request.get_cookie('id_igre', secret=SKRIVNOST))
     igra = sudoku.igre[id_igre]
-    return bottle.template('Sudoku/views/resitev.tpl', igra=igra, id_igre=id_igre)
+    return bottle.template('resitev.tpl', igra=igra, id_igre=id_igre)
 
 @bottle.post('/resitev_preusmeritev/<id_igre>/')
 def preusmeritev_resitev_igre(id_igre):

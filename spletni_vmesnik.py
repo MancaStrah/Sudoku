@@ -8,7 +8,6 @@ DATOTOEKA_S_SUDOKUJI = 'Sudoku/sudoku_in_resitve.txt'
 
 sudoku = Sudoku(DATOTETKA_S_STANJEM, DATOTOEKA_S_SUDOKUJI)
 
-
 @bottle.get('/')
 def index():
     return bottle.template('Sudoku/oblikovanje/index.tpl')

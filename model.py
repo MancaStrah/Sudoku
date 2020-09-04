@@ -40,13 +40,16 @@ class Igra:
     def vnos(self, celica, stevilo):
         '''Preveri, ali je znak veljaven, in ga vnese v celico,
         če ta ni fiksna.'''
-        if stevilo not in (1,2,3,4,5,6,7,8,9,):
+        if stevilo not in (0,1,2,3,4,5,6,7,8,9):
             return NAPACEN_ZNAK
         if self.zacetni[celica] != 0:
             return FIKSNO_POLJE
+        if stevilo == 0:
+            self.trenutni[celica] = 0
+            self.zadnji_vnos = ()
         else:
             self.trenutni[celica] = stevilo
-        self.zadnji_vnos = (celica, stevilo)
+            self.zadnji_vnos = (celica, stevilo)
         return USPESEN_VNOS
     
     def kvadratek(self, celica):
@@ -118,9 +121,9 @@ class Igra:
         ostala trenutno vnešena števila (in ne glede na rešitev).
         Polja, kjer se število iz celice ponovi, vnese v slovar.'''
         self.napake[celica] = set()
-        v = self.preveri_vrstico(celica)
-        s = self.preveri_stolpec(celica)
-        k = self.preveri_kvadratek(celica)
+        self.preveri_vrstico(celica)
+        self.preveri_stolpec(celica)
+        self.preveri_kvadratek(celica)
         return self.napake[celica] 
 
     def pocisti(self):
@@ -132,7 +135,7 @@ class Igra:
 
 class Sudoku:
     
-    def __init__(self, datoteka_s_stanjem, datoteka_s_sudokuji='Sudoku\sudoku_in_resitve.txt'):
+    def __init__(self, datoteka_s_stanjem, datoteka_s_sudokuji='Sudoku/sudoku_in_resitve.txt'):
         self.igre = {}
         self.datoteka_s_stanjem = datoteka_s_stanjem
         self.datoteka_s_sudokuji = datoteka_s_sudokuji

@@ -72,7 +72,7 @@
         <p style="font-size: 30px; padding-top: 120px; padding-bottom: 50px">Želite med igro pomoč?</p>
    
         <p style="font-size: 22px"> Če želite, da računalnik ob vsakem vnosu preveri, <br>
-            ali je vnost glede na trenutne vnose pravilen, izberite 'da'. 
+            ali je vnos glede na trenutne vnose pravilen, izberite 'da'. 
         </p>
                
         <p style="font-size: 19px;">Polje, v katero boste vnesli število, se bo obarvalo zeleno, <br>

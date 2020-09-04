@@ -1,5 +1,5 @@
 # Sudoku
-Sudoku, ki hkrati služi kot projektna naloga pri predmetu Uvod v programiranje.
+Igra sudoku, hkrati tudi projektna naloga pri predmetu Uvod v programiranje.
 
 ## Uporaba
 Poženite 'spletni_vmesnik.py' in sledite povezavi, ki vas vodi do spletne strani. 
@@ -9,6 +9,7 @@ Izbirate lahko med tremi stopnjami težavnosti. Vključite lahko tudi pomoč -
 računalnik bo ob vsakem vnosu preveril, ali je vnos glede na ostala polja
 (in ne glede na rešitev) pravilen.
 Ko zaključite z izpolnjevanjem, lahko preverite, ali je vaša rešitev pravilna.
+Dodatna navodila za igro so med igro zapisana ob igralnem polju. 
 
 ## Pravila
 Cilj igre je zapolniti polje velikosti 9x9 s števili od 1 do 9, tako da se vsako 

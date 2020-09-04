@@ -88,7 +88,7 @@
             text-align: center;
             width: 59px;
             height: 59px;
-
+            font-size: 25px;
         }
 
         .napacen_kvadratek {
@@ -98,6 +98,7 @@
             text-align: center;
             width: 59px;
             height: 59px;
+            font-size: 25px;
         }
 
         .poln_kvadratek {
@@ -107,6 +108,7 @@
             text-align: center;
             width: 59px;
             height: 59px;
+            font-size: 25px;
         }
 
         .prazen_gumb {
@@ -116,6 +118,7 @@
             text-align: center;
             width: 59px;
             height: 59px;
+            font-size: 25px;
         }
 
         .izpolnjen_gumb{
@@ -125,6 +128,7 @@
             text-align: center;
             width: 59px;
             height: 59px;
+            font-size: 25px;
         }
     </style>
 

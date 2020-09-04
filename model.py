@@ -200,7 +200,6 @@ class Sudoku:
         with open(self.datoteka_s_stanjem, 'w', encoding='utf-8') as f:
             seznam = {id_igre: (igra.resitve, igra.zacetni, igra.trenutni, igra.napake, igra.zadnji_vnos)
                      for id_igre, igra in self.igre.items()} 
-            print(self.igre.items())
             json.dump(str(seznam), f)
         
     def nalozi_igre_iz_datoteke(self):

@@ -1,5 +1,5 @@
 # Sudoku
-Projektna naloga pri predmetu Uvod v programiranje.
+Sudoku, ki hkrati služi kot projektna naloga pri predmetu Uvod v programiranje.
 
 ## Uporaba
 Poženite 'spletni_vmesnik.py' in sledite povezavi, ki vas vodi do spletne strani. 
